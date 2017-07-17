@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -31,9 +31,8 @@
 		57A6500F1F1BF28D005C7A79 /* RxCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFC1F1BF28D005C7A79 /* RxCocoa.swift */; };
 		57A650101F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */; };
 		57A650111F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */; };
-		57A650221F1BF309005C7A79 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A650201F1BF309005C7A79 /* Info.plist */; };
 		57A650231F1BF309005C7A79 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A650201F1BF309005C7A79 /* Info.plist */; };
-		57A650241F1BF309005C7A79 /* RxTextureDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A650211F1BF309005C7A79 /* RxTextureDataSources.h */; };
+		57DE26A41F1C5B5600EC4CF6 /* RxTextureDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A650211F1BF309005C7A79 /* RxTextureDataSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -470,7 +469,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57A650241F1BF309005C7A79 /* RxTextureDataSources.h in Headers */,
+				57DE26A41F1C5B5600EC4CF6 /* RxTextureDataSources.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +536,7 @@
 				};
 			};
 			buildConfigurationList = 3549BAFF1DA387DB00C63030 /* Build configuration list for PBXProject "RxTextureDataSources" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -698,7 +697,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57A650221F1BF309005C7A79 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
