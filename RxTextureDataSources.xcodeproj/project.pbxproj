@@ -7,42 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3549BB661DA38ADB00C63030 /* RxTextureDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3549BB211DA389CD00C63030 /* RxTextureDataSources.framework */; };
-		3549BB8B1DA38C0A00C63030 /* RxTextureDataSourcesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3549BB8A1DA38C0A00C63030 /* RxTextureDataSourcesSpec.swift */; };
-		35CA2AC61E12925700147290 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CA2A971E12920400147290 /* Nimble.framework */; };
-		35CA2AC71E12925700147290 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CA2AB31E12920400147290 /* Quick.framework */; };
+		574FD4EC1F1E6C2500485456 /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574FD4E81F1E6C2500485456 /* AsyncDisplayKit.framework */; };
+		574FD4ED1F1E6C2500485456 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574FD4E91F1E6C2500485456 /* RxCocoa.framework */; };
+		574FD4EE1F1E6C2500485456 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574FD4EA1F1E6C2500485456 /* RxDataSources.framework */; };
+		574FD4EF1F1E6C2500485456 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574FD4EB1F1E6C2500485456 /* RxSwift.framework */; };
 		57A64FFE1F1BF28D005C7A79 /* ASDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF41F1BF28D005C7A79 /* ASDelegateProxy.swift */; };
-		57A64FFF1F1BF28D005C7A79 /* ASDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF41F1BF28D005C7A79 /* ASDelegateProxy.swift */; };
 		57A650001F1BF28D005C7A79 /* ASTableNode+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF51F1BF28D005C7A79 /* ASTableNode+Rx.swift */; };
-		57A650011F1BF28D005C7A79 /* ASTableNode+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF51F1BF28D005C7A79 /* ASTableNode+Rx.swift */; };
 		57A650021F1BF28D005C7A79 /* ASTableSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF61F1BF28D005C7A79 /* ASTableSectionedDataSource.swift */; };
-		57A650031F1BF28D005C7A79 /* ASTableSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF61F1BF28D005C7A79 /* ASTableSectionedDataSource.swift */; };
 		57A650041F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF71F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift */; };
-		57A650051F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF71F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift */; };
 		57A650061F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF81F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift */; };
-		57A650071F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF81F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift */; };
 		57A650081F1BF28D005C7A79 /* RxASTableDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF91F1BF28D005C7A79 /* RxASTableDataSourceType.swift */; };
-		57A650091F1BF28D005C7A79 /* RxASTableDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF91F1BF28D005C7A79 /* RxASTableDataSourceType.swift */; };
 		57A6500A1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFA1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift */; };
-		57A6500B1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFA1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift */; };
 		57A6500C1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFB1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift */; };
-		57A6500D1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFB1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift */; };
 		57A6500E1F1BF28D005C7A79 /* RxCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFC1F1BF28D005C7A79 /* RxCocoa.swift */; };
-		57A6500F1F1BF28D005C7A79 /* RxCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFC1F1BF28D005C7A79 /* RxCocoa.swift */; };
 		57A650101F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */; };
-		57A650111F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */; };
-		57A650231F1BF309005C7A79 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57A650201F1BF309005C7A79 /* Info.plist */; };
 		57DE26A41F1C5B5600EC4CF6 /* RxTextureDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A650211F1BF309005C7A79 /* RxTextureDataSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3549BB671DA38ADB00C63030 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3549BAFC1DA387DB00C63030 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3549BB201DA389CD00C63030;
-			remoteInfo = "RxTextureDataSources-iOS";
-		};
 		35CA2A921E12920400147290 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 35CA2A891E12920400147290 /* Nimble.xcodeproj */;
@@ -169,26 +151,11 @@
 			remoteGlobalIDString = 64076D1A1D6D7CEA00E2B499;
 			remoteInfo = "QuickAfterSuite-tvOSTests";
 		};
-		35CA2AC21E12922F00147290 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 35CA2A861E12920400147290 /* Quick.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5A5D117B19473F2100F6D13D;
-			remoteInfo = "Quick-iOS";
-		};
-		35CA2AC41E12922F00147290 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 35CA2A891E12920400147290 /* Nimble.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F1A74281940169200FFFC47;
-			remoteInfo = "Nimble-iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3549BB211DA389CD00C63030 /* RxTextureDataSources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxTextureDataSources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3549BB581DA38A8800C63030 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3549BB611DA38ADB00C63030 /* RxTextureDataSourcesTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RxTextureDataSourcesTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3549BB8A1DA38C0A00C63030 /* RxTextureDataSourcesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTextureDataSourcesSpec.swift; sourceTree = "<group>"; };
 		35CA2A861E12920400147290 /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
 		35CA2A891E12920400147290 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
@@ -217,6 +184,10 @@
 		35CD65161E60192300AF060B /* watchOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Base.xcconfig"; sourceTree = "<group>"; };
 		35CD65171E60192300AF060B /* watchOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Framework.xcconfig"; sourceTree = "<group>"; };
 		35CD65181E60192300AF060B /* watchOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		574FD4E81F1E6C2500485456 /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = "Carthage/Checkouts/texture/build/Debug-iphoneos/AsyncDisplayKit.framework"; sourceTree = "<group>"; };
+		574FD4E91F1E6C2500485456 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = "Carthage/Checkouts/RxSwift/build/Debug-iphoneos/RxCocoa.framework"; sourceTree = "<group>"; };
+		574FD4EA1F1E6C2500485456 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = "Carthage/Checkouts/RxDataSources/build/Debug-iphoneos/RxDataSources.framework"; sourceTree = "<group>"; };
+		574FD4EB1F1E6C2500485456 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = "Carthage/Checkouts/RxSwift/build/Debug-iphoneos/RxSwift.framework"; sourceTree = "<group>"; };
 		57A64FF41F1BF28D005C7A79 /* ASDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASDelegateProxy.swift; sourceTree = "<group>"; };
 		57A64FF51F1BF28D005C7A79 /* ASTableNode+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ASTableNode+Rx.swift"; sourceTree = "<group>"; };
 		57A64FF61F1BF28D005C7A79 /* ASTableSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTableSectionedDataSource.swift; sourceTree = "<group>"; };
@@ -236,16 +207,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3549BB5E1DA38ADB00C63030 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				35CA2AC61E12925700147290 /* Nimble.framework in Frameworks */,
-				35CA2AC71E12925700147290 /* Quick.framework in Frameworks */,
-				3549BB661DA38ADB00C63030 /* RxTextureDataSources.framework in Frameworks */,
+				574FD4EC1F1E6C2500485456 /* AsyncDisplayKit.framework in Frameworks */,
+				574FD4ED1F1E6C2500485456 /* RxCocoa.framework in Frameworks */,
+				574FD4EE1F1E6C2500485456 /* RxDataSources.framework in Frameworks */,
+				574FD4EF1F1E6C2500485456 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				3549BB211DA389CD00C63030 /* RxTextureDataSources.framework */,
-				3549BB611DA38ADB00C63030 /* RxTextureDataSourcesTests-iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -301,6 +265,10 @@
 		357D954B1DA3F2B400AEC55F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				574FD4E81F1E6C2500485456 /* AsyncDisplayKit.framework */,
+				574FD4E91F1E6C2500485456 /* RxCocoa.framework */,
+				574FD4EA1F1E6C2500485456 /* RxDataSources.framework */,
+				574FD4EB1F1E6C2500485456 /* RxSwift.framework */,
 				35CA2A861E12920400147290 /* Quick.xcodeproj */,
 				35CA2A891E12920400147290 /* Nimble.xcodeproj */,
 			);
@@ -494,26 +462,6 @@
 			productReference = 3549BB211DA389CD00C63030 /* RxTextureDataSources.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3549BB601DA38ADB00C63030 /* RxTextureDataSourcesTests-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3549BB691DA38ADB00C63030 /* Build configuration list for PBXNativeTarget "RxTextureDataSourcesTests-iOS" */;
-			buildPhases = (
-				3549BB5D1DA38ADB00C63030 /* Sources */,
-				3549BB5E1DA38ADB00C63030 /* Frameworks */,
-				3549BB5F1DA38ADB00C63030 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				35CA2AC31E12922F00147290 /* PBXTargetDependency */,
-				35CA2AC51E12922F00147290 /* PBXTargetDependency */,
-				3549BB681DA38ADB00C63030 /* PBXTargetDependency */,
-			);
-			name = "RxTextureDataSourcesTests-iOS";
-			productName = "RxTextureDataSourcesTests-iOS";
-			productReference = 3549BB611DA38ADB00C63030 /* RxTextureDataSourcesTests-iOS.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -526,11 +474,6 @@
 				TargetAttributes = {
 					3549BB201DA389CD00C63030 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Automatic;
-					};
-					3549BB601DA38ADB00C63030 = {
-						CreatedOnToolsVersion = 8.0;
-						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -558,7 +501,6 @@
 			projectRoot = "";
 			targets = (
 				3549BB201DA389CD00C63030 /* RxTextureDataSources-iOS */,
-				3549BB601DA38ADB00C63030 /* RxTextureDataSourcesTests-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -700,14 +642,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3549BB5F1DA38ADB00C63030 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				57A650231F1BF309005C7A79 /* Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -728,43 +662,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3549BB5D1DA38ADB00C63030 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				57A650071F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift in Sources */,
-				57A650031F1BF28D005C7A79 /* ASTableSectionedDataSource.swift in Sources */,
-				57A6500B1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift in Sources */,
-				57A650051F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift in Sources */,
-				57A650091F1BF28D005C7A79 /* RxASTableDataSourceType.swift in Sources */,
-				57A650011F1BF28D005C7A79 /* ASTableNode+Rx.swift in Sources */,
-				3549BB8B1DA38C0A00C63030 /* RxTextureDataSourcesSpec.swift in Sources */,
-				57A64FFF1F1BF28D005C7A79 /* ASDelegateProxy.swift in Sources */,
-				57A6500D1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift in Sources */,
-				57A6500F1F1BF28D005C7A79 /* RxCocoa.swift in Sources */,
-				57A650111F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3549BB681DA38ADB00C63030 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3549BB201DA389CD00C63030 /* RxTextureDataSources-iOS */;
-			targetProxy = 3549BB671DA38ADB00C63030 /* PBXContainerItemProxy */;
-		};
-		35CA2AC31E12922F00147290 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Quick-iOS";
-			targetProxy = 35CA2AC21E12922F00147290 /* PBXContainerItemProxy */;
-		};
-		35CA2AC51E12922F00147290 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Nimble-iOS";
-			targetProxy = 35CA2AC41E12922F00147290 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3549BB0B1DA387DB00C63030 /* Debug */ = {
@@ -879,12 +777,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Checkouts/xcconfigs/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/xcconfigs/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Checkouts/xcconfigs/Carthage/Build/tvOS",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -904,55 +796,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Checkouts/xcconfigs/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/xcconfigs/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Checkouts/xcconfigs/Carthage/Build/tvOS",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.dangthaison91.rxtexture.RxTextureDataSources;
 				PRODUCT_NAME = RxTextureDataSources;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		3549BB6A1DA38ADB00C63030 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35CD65041E60192300AF060B /* iOS-Application.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.dangthaison91.rxtexture.RxTextureDataSourcesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		3549BB6B1DA38ADB00C63030 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35CD65041E60192300AF060B /* iOS-Application.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.dangthaison91.rxtexture.RxTextureDataSourcesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -974,15 +823,6 @@
 			buildConfigurations = (
 				3549BB271DA389CD00C63030 /* Debug */,
 				3549BB281DA389CD00C63030 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3549BB691DA38ADB00C63030 /* Build configuration list for PBXNativeTarget "RxTextureDataSourcesTests-iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3549BB6A1DA38ADB00C63030 /* Debug */,
-				3549BB6B1DA38ADB00C63030 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
