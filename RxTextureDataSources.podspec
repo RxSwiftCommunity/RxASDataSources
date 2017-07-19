@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
      s.platforms     = { :ios => "8.0" }
      s.requires_arc = true
 
-     s.source_files  = "Sources/"
+     s.source_files  = "Sources/**/*.swift"
      s.framework  = "Foundation"
      s.dependency 'RxDataSources', '~> 1.0'
      s.dependency 'Texture', '~> 2.0'
