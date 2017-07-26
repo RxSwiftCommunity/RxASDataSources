@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		574FD4EC1F1E6C2500485456 /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574FD4E81F1E6C2500485456 /* AsyncDisplayKit.framework */; };
-		574FD4ED1F1E6C2500485456 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574FD4E91F1E6C2500485456 /* RxCocoa.framework */; };
-		574FD4EE1F1E6C2500485456 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574FD4EA1F1E6C2500485456 /* RxDataSources.framework */; };
-		574FD4EF1F1E6C2500485456 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574FD4EB1F1E6C2500485456 /* RxSwift.framework */; };
 		57A64FFE1F1BF28D005C7A79 /* ASDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF41F1BF28D005C7A79 /* ASDelegateProxy.swift */; };
 		57A650001F1BF28D005C7A79 /* ASTableNode+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF51F1BF28D005C7A79 /* ASTableNode+Rx.swift */; };
 		57A650021F1BF28D005C7A79 /* ASTableSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF61F1BF28D005C7A79 /* ASTableSectionedDataSource.swift */; };
@@ -19,9 +15,13 @@
 		57A650081F1BF28D005C7A79 /* RxASTableDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF91F1BF28D005C7A79 /* RxASTableDataSourceType.swift */; };
 		57A6500A1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFA1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift */; };
 		57A6500C1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFB1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift */; };
-		57A6500E1F1BF28D005C7A79 /* RxCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFC1F1BF28D005C7A79 /* RxCocoa.swift */; };
 		57A650101F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */; };
 		57DE26A41F1C5B5600EC4CF6 /* RxTextureDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A650211F1BF309005C7A79 /* RxTextureDataSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57E562FF1F28FADF002E825B /* RxHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E562FE1F28FADF002E825B /* RxHelpers.swift */; };
+		57E563041F28FEB3002E825B /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563031F28FEB3002E825B /* AsyncDisplayKit.framework */; };
+		57E563061F28FEBD002E825B /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563051F28FEBD002E825B /* RxSwift.framework */; };
+		57E563081F28FEC4002E825B /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563071F28FEC4002E825B /* RxCocoa.framework */; };
+		57E5630A1F28FECF002E825B /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563091F28FECF002E825B /* RxDataSources.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,10 +196,14 @@
 		57A64FF91F1BF28D005C7A79 /* RxASTableDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableDataSourceType.swift; sourceTree = "<group>"; };
 		57A64FFA1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableDelegateProxy.swift; sourceTree = "<group>"; };
 		57A64FFB1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableReactiveArrayDataSource.swift; sourceTree = "<group>"; };
-		57A64FFC1F1BF28D005C7A79 /* RxCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCocoa.swift; sourceTree = "<group>"; };
 		57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UI+SectionedViewType.swift"; sourceTree = "<group>"; };
 		57A650201F1BF309005C7A79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57A650211F1BF309005C7A79 /* RxTextureDataSources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTextureDataSources.h; sourceTree = "<group>"; };
+		57E562FE1F28FADF002E825B /* RxHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
+		57E563031F28FEB3002E825B /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = "../../../../Users/sondt/Library/Developer/Xcode/DerivedData/RxTextureDataSources-hjacuybyhkyzareukzfcxgvmvvmv/Build/Products/Debug-iphonesimulator/AsyncDisplayKit.framework"; sourceTree = "<group>"; };
+		57E563051F28FEBD002E825B /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = "../../../../Users/sondt/Library/Developer/Xcode/DerivedData/RxTextureDataSources-hjacuybyhkyzareukzfcxgvmvvmv/Build/Products/Debug-iphonesimulator/RxSwift.framework"; sourceTree = "<group>"; };
+		57E563071F28FEC4002E825B /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = "../../../../Users/sondt/Library/Developer/Xcode/DerivedData/RxTextureDataSources-hjacuybyhkyzareukzfcxgvmvvmv/Build/Products/Debug-iphonesimulator/RxCocoa.framework"; sourceTree = "<group>"; };
+		57E563091F28FECF002E825B /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = "../../../../Users/sondt/Library/Developer/Xcode/DerivedData/RxTextureDataSources-hjacuybyhkyzareukzfcxgvmvvmv/Build/Products/Debug-iphonesimulator/RxDataSources.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,10 +211,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				574FD4EC1F1E6C2500485456 /* AsyncDisplayKit.framework in Frameworks */,
-				574FD4ED1F1E6C2500485456 /* RxCocoa.framework in Frameworks */,
-				574FD4EE1F1E6C2500485456 /* RxDataSources.framework in Frameworks */,
-				574FD4EF1F1E6C2500485456 /* RxSwift.framework in Frameworks */,
+				57E5630A1F28FECF002E825B /* RxDataSources.framework in Frameworks */,
+				57E563081F28FEC4002E825B /* RxCocoa.framework in Frameworks */,
+				57E563061F28FEBD002E825B /* RxSwift.framework in Frameworks */,
+				57E563041F28FEB3002E825B /* AsyncDisplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +269,10 @@
 		357D954B1DA3F2B400AEC55F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57E563091F28FECF002E825B /* RxDataSources.framework */,
+				57E563071F28FEC4002E825B /* RxCocoa.framework */,
+				57E563051F28FEBD002E825B /* RxSwift.framework */,
+				57E563031F28FEB3002E825B /* AsyncDisplayKit.framework */,
 				574FD4E81F1E6C2500485456 /* AsyncDisplayKit.framework */,
 				574FD4E91F1E6C2500485456 /* RxCocoa.framework */,
 				574FD4EA1F1E6C2500485456 /* RxDataSources.framework */,
@@ -415,8 +423,8 @@
 				57A64FF91F1BF28D005C7A79 /* RxASTableDataSourceType.swift */,
 				57A64FFA1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift */,
 				57A64FFB1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift */,
-				57A64FFC1F1BF28D005C7A79 /* RxCocoa.swift */,
 				57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */,
+				57E562FE1F28FADF002E825B /* RxHelpers.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -651,12 +659,12 @@
 			files = (
 				57A650041F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift in Sources */,
 				57A650081F1BF28D005C7A79 /* RxASTableDataSourceType.swift in Sources */,
-				57A6500E1F1BF28D005C7A79 /* RxCocoa.swift in Sources */,
 				57A650101F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */,
 				57A650001F1BF28D005C7A79 /* ASTableNode+Rx.swift in Sources */,
 				57A650061F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift in Sources */,
 				57A6500C1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift in Sources */,
 				57A6500A1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift in Sources */,
+				57E562FF1F28FADF002E825B /* RxHelpers.swift in Sources */,
 				57A650021F1BF28D005C7A79 /* ASTableSectionedDataSource.swift in Sources */,
 				57A64FFE1F1BF28D005C7A79 /* ASDelegateProxy.swift in Sources */,
 			);

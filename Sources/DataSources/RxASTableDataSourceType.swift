@@ -1,9 +1,9 @@
 //
 //  RxASTableDataSourceType.swift
-//  actisso
+//
 //
 //  Created by Dang Thai Son on 7/16/17.
-//  Copyright © 2017 Innovatube. All rights reserved.
+//  Copyright © 2017 Dang Thai Son. All rights reserved.
 //
 
 import Foundation

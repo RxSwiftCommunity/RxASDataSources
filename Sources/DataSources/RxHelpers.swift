@@ -1,9 +1,9 @@
 //
 //  RxHelpers.swift
-//  actisso
+//  RxTextureDataSources
 //
 //  Created by Dang Thai Son on 7/15/17.
-//  Copyright © 2017 Innovatube. All rights reserved.
+//  Copyright © 2017 Dang Thai Son. All rights reserved.
 //
 
 import Foundation
@@ -83,17 +83,17 @@ func castOrFatalError<T>(_ value: Any!) -> T {
 
 func rxDebugFatalError(_ message: String) {
     #if DEBUG
-    fatalError(message)
+        fatalError(message)
     #else
-    print(message)
+        print(message)
     #endif
 }
 
 #if !RX_NO_MODULE
 
-func rxFatalError(_ lastMessage: String) -> Never  {
-    // The temptation to comment this line is great, but please don't, it's for your own good. The choice is yours.
-    fatalError(lastMessage)
-}
-
+    func rxFatalError(_ lastMessage: String) -> Never  {
+        // The temptation to comment this line is great, but please don't, it's for your own good. The choice is yours.
+        fatalError(lastMessage)
+    }
+    
 #endif

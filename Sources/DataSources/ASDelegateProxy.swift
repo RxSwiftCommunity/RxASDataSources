@@ -1,9 +1,9 @@
 //
 //  ASDelegateProxy.swift
-//  actisso
+//
 //
 //  Created by Dang Thai Son on 7/15/17.
-//  Copyright © 2017 Innovatube. All rights reserved.
+//  Copyright © 2017 Dang Thai Son. All rights reserved.
 //
 
 import Foundation
@@ -23,8 +23,7 @@ extension ObservableType {
             let subscription = self.asObservable()
                 .observeOn(MainScheduler())
                 .catchError { error in
-                    fatalError("bindingErrorToInterface")
-//                    bindingErrorToInterface(error)
+                    bindingErrorToInterface(error)
                     return Observable.empty()
                 }
                 // source can never end, otherwise it would release the subscriber, and deallocate the data source
@@ -40,9 +39,7 @@ extension ObservableType {
 
                     switch event {
                     case .error(let error):
-                        fatalError("bindingErrorToInterface")
-
-//                        bindingErrorToInterface(error)
+                        bindingErrorToInterface(error)
                         unregisterDelegate.dispose()
                     case .completed:
                         unregisterDelegate.dispose()
