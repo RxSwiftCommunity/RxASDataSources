@@ -46,8 +46,10 @@ open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCo
                         }
                     } catch {
                         rxDebugFatalError("\(error)")
-                        self.setSections(newSections)
-                        collectionNode.reloadData()
+                        DispatchQueue.main.async {
+                            self.setSections(newSections)
+                            collectionNode.reloadData()
+                        }
                     }
                 }
             }

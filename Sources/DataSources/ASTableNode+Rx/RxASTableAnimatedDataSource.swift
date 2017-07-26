@@ -46,8 +46,10 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
                         }
                     } catch {
                         rxDebugFatalError("\(error)")
-                        self.setSections(newSections)
-                        tableNode.reloadData()
+                        DispatchQueue.main.async {
+                            self.setSections(newSections)
+                            tableNode.reloadData()
+                        }
                     }
                 }
             }

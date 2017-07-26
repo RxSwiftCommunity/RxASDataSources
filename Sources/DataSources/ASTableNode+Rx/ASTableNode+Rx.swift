@@ -11,7 +11,7 @@ import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 
-extension ASTableNode {
+public extension ASTableNode {
 
     /**
      Factory method that enables subclasses to implement their own `delegate`.
@@ -32,7 +32,7 @@ extension ASTableNode {
     }
 }
 
-extension Reactive where Base: ASTableNode {
+public extension Reactive where Base: ASTableNode {
     func items<DataSource: RxASTableDataSourceType & ASTableDataSource, O: ObservableType>(dataSource: DataSource)
         -> (_ source: O)
         -> Disposable where DataSource.Element == O.E {
@@ -52,7 +52,7 @@ extension Reactive where Base: ASTableNode {
 }
 
 
-extension Reactive where Base: ASTableNode {
+public extension Reactive where Base: ASTableNode {
     /**
      Reactive wrapper for `dataSource`.
 

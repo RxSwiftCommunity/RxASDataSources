@@ -10,7 +10,7 @@ import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 
-extension ASCollectionNode {
+public extension ASCollectionNode {
 
     /**
      Factory method that enables subclasses to implement their own `delegate`.
@@ -31,7 +31,7 @@ extension ASCollectionNode {
     }
 }
 
-extension Reactive where Base: ASCollectionNode {
+public extension Reactive where Base: ASCollectionNode {
     func items<DataSource: RxASCollectionDataSourceType & ASCollectionDataSource, O: ObservableType>(dataSource: DataSource)
         -> (_ source: O)
         -> Disposable where DataSource.Element == O.E {
@@ -50,7 +50,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 }
 
-extension Reactive where Base: ASCollectionNode {
+public extension Reactive where Base: ASCollectionNode {
     /**
      Reactive wrapper for `dataSource`.
 
