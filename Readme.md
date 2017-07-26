@@ -2,14 +2,11 @@
 
 [![Platforms](https://img.shields.io/cocoapods/p/RxTextureDataSources.svg)](https://cocoapods.org/pods/RxTextureDataSources)
 [![License](https://img.shields.io/cocoapods/l/RxTextureDataSources.svg)](https://raw.githubusercontent.com/RxSwiftCommunity/RxTextureDataSources/master/LICENSE)
-
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/RxTextureDataSources.svg)](https://cocoapods.org/pods/RxTextureDataSources)
-
 [![Travis](https://img.shields.io/travis/RxSwiftCommunity/RxTextureDataSources/master.svg)](https://travis-ci.org/RxSwiftCommunity/RxTextureDataSources/branches)
-[![JetpackSwift](https://img.shields.io/badge/JetpackSwift-framework-red.svg)](http://github.com/JetpackSwift/Framework)
 
-RxDataSource for AsyncDisplayKit/Texture view containers
+RxDataSource for AsyncDisplayKit/Texture: ASTableNode & ASCollectionNode
 
 - [Requirements](#requirements)
 - [Installation](#installation)
