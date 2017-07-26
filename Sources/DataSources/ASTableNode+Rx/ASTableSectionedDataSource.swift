@@ -38,6 +38,39 @@ open class _ASTableSectionedDataSource: NSObject, ASTableDataSource {
     open func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         return _rx_tableNode(tableNode, nodeForRowAt: indexPath)
     }
+
+    @nonobjc open func _rx_tableNode(_ tableNode: ASTableNode, titleForHeaderInSection section: Int) -> String? {
+        return nil
+    }
+
+    @nonobjc open func tableNode(_ tableNode: ASTableNode, titleForHeaderInSection section: Int) -> String? {
+        return _rx_tableNode(tableNode, titleForHeaderInSection: section)
+    }
+
+    @nonobjc open func _rx_tableNode(_ tableNode: ASTableNode, titleForFooterInSection section: Int) -> String? {
+        return nil
+    }
+
+    @nonobjc open func tableNode(_ tableNode: ASTableNode, titleForFooterInSection section: Int) -> String? {
+        return _rx_tableNode(tableNode, titleForFooterInSection: section)
+    }
+
+    open func _rx_tableNode(_ tableNode: ASTableNode, canEditRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    @nonobjc open func tableNode(_ tableNode: ASTableNode, canEditRowAt indexPath: IndexPath) -> Bool {
+        return _rx_tableNode(tableNode, canEditRowAt: indexPath)
+    }
+
+    open func _rx_tableNode(_ tableNode: ASTableNode, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    @nonobjc open func tableNode(_ tableNode: ASTableNode, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return _rx_tableNode(tableNode, canMoveRowAt: indexPath)
+    }
+
 }
 
 open class ASTableSectionedDataSource<S: SectionModelType>: _ASTableSectionedDataSource, SectionedViewDataSourceType {
@@ -104,6 +137,36 @@ open class ASTableSectionedDataSource<S: SectionModelType>: _ASTableSectionedDat
         }
     }
 
+    open var titleForHeaderInSection: ((ASTableSectionedDataSource<S>, Int) -> String?)? {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    open var titleForFooterInSection: ((ASTableSectionedDataSource<S>, Int) -> String?)? {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+
+    open var canEditRowAtIndexPath: ((ASTableSectionedDataSource<S>, IndexPath) -> Bool)? {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    open var canMoveRowAtIndexPath: ((ASTableSectionedDataSource<S>, IndexPath) -> Bool)? {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+
     open var rowAnimation: UITableViewRowAnimation = .automatic
 
     public override init() {
@@ -133,5 +196,33 @@ open class ASTableSectionedDataSource<S: SectionModelType>: _ASTableSectionedDat
 
         return configureCell(self, tableNode, indexPath, self[indexPath])
     }
+
+    open override func _rx_tableNode(_ tableNode: ASTableNode, titleForHeaderInSection section: Int) -> String? {
+        return titleForHeaderInSection?(self, section)
+    }
+
+    open override func _rx_tableNode(_ tableNode: ASTableNode, titleForFooterInSection section: Int) -> String? {
+        return titleForFooterInSection?(self, section)
+    }
+
+    open override func _rx_tableNode(_ tableNode: ASTableNode, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard let canEditRow = canEditRowAtIndexPath?(self, indexPath) else {
+            return super._rx_tableNode(tableNode, canEditRowAt: indexPath)
+        }
+
+        return canEditRow
+    }
+
+    open override func _rx_tableNode(_ tableNode: ASTableNode, canMoveRowAt indexPath: IndexPath) -> Bool {
+        guard let canMoveRow = canMoveRowAtIndexPath?(self, indexPath) else {
+            return super._rx_tableNode(tableNode, canMoveRowAt: indexPath)
+        }
+
+        return canMoveRow
+    }
+
+//    open override func _rx_tableNode(_ tableNode: ASTableNode, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
+//    }
 
 }

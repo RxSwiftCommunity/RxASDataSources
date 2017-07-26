@@ -30,30 +30,18 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
             #endif
             if !self.dataSet {
                 self.dataSet = true
-                dataSource.setSections(newSections)
-                tableNode.reloadData(completion: {
-                    DispatchQueue.main.async {
-                        let count = tableNode.numberOfRows(inSection: 0)
-                        guard count > 0 else { return }
-                        tableNode.scrollToRow(at: IndexPath(row: count - 1, section: 0), at: .bottom, animated: false)
-                    }
-                })
-
+                DispatchQueue.main.async {
+                    dataSource.setSections(newSections)
+                    tableNode.reloadData()
+                }
             } else {
                 DispatchQueue.main.async {
-                    // if view is not in view hierarchy, performing batch updates will crash the app
-                    if !tableNode.isVisible  {
-                        dataSource.setSections(newSections)
-                        tableNode.reloadData()
-                        return
-                    }
                     let oldSections = dataSource.sectionModels
                     do {
                         let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
                         for difference in differences {
                             dataSource.setSections(difference.finalSections)
-
                             tableNode.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
                         }
                     } catch {

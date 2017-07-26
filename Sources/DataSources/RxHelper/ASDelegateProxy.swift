@@ -6,11 +6,10 @@
 //  Copyright © 2017 Dang Thai Son. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import AsyncDisplayKit
 import RxSwift
 import RxCocoa
-import AsyncDisplayKit
 
 extension ObservableType {
     func subscribeProxyDataSource<P: DelegateProxyType>(ofObject object: ASDisplayNode, dataSource: AnyObject, retainDataSource: Bool, binding: @escaping (P, RxSwift.Event<E>) -> Void)

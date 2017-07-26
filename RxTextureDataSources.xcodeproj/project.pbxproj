@@ -7,21 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57A64FFE1F1BF28D005C7A79 /* ASDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF41F1BF28D005C7A79 /* ASDelegateProxy.swift */; };
-		57A650001F1BF28D005C7A79 /* ASTableNode+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF51F1BF28D005C7A79 /* ASTableNode+Rx.swift */; };
-		57A650021F1BF28D005C7A79 /* ASTableSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF61F1BF28D005C7A79 /* ASTableSectionedDataSource.swift */; };
-		57A650041F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF71F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift */; };
-		57A650061F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF81F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift */; };
-		57A650081F1BF28D005C7A79 /* RxASTableDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FF91F1BF28D005C7A79 /* RxASTableDataSourceType.swift */; };
-		57A6500A1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFA1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift */; };
-		57A6500C1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFB1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift */; };
-		57A650101F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */; };
+		57A650101F1BF28D005C7A79 /* SectionedViewType+BatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A64FFD1F1BF28D005C7A79 /* SectionedViewType+BatchUpdate.swift */; };
 		57DE26A41F1C5B5600EC4CF6 /* RxTextureDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A650211F1BF309005C7A79 /* RxTextureDataSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57E562FF1F28FADF002E825B /* RxHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E562FE1F28FADF002E825B /* RxHelpers.swift */; };
-		57E563041F28FEB3002E825B /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563031F28FEB3002E825B /* AsyncDisplayKit.framework */; };
 		57E563061F28FEBD002E825B /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563051F28FEBD002E825B /* RxSwift.framework */; };
 		57E563081F28FEC4002E825B /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563071F28FEC4002E825B /* RxCocoa.framework */; };
 		57E5630A1F28FECF002E825B /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563091F28FECF002E825B /* RxDataSources.framework */; };
+		57E5632C1F290656002E825B /* RxHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5632B1F290656002E825B /* RxHelpers.swift */; };
+		57E5632E1F29066F002E825B /* ASDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5632D1F29066F002E825B /* ASDelegateProxy.swift */; };
+		57E563471F290718002E825B /* ASTableNode+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563401F290718002E825B /* ASTableNode+Rx.swift */; };
+		57E563481F290718002E825B /* ASTableSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563411F290718002E825B /* ASTableSectionedDataSource.swift */; };
+		57E563491F290718002E825B /* RxASTableAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563421F290718002E825B /* RxASTableAnimatedDataSource.swift */; };
+		57E5634B1F290718002E825B /* RxASTableDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563441F290718002E825B /* RxASTableDataSourceType.swift */; };
+		57E5634D1F290718002E825B /* RxASTableReactiveArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563461F290718002E825B /* RxASTableReactiveArrayDataSource.swift */; };
+		57E563511F2907B3002E825B /* RxASCollectionDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563501F2907B3002E825B /* RxASCollectionDataSourceType.swift */; };
+		57E563551F290B8D002E825B /* ASCollectionSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563541F290B8D002E825B /* ASCollectionSectionedDataSource.swift */; };
+		57E563571F290FCD002E825B /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563561F290FCD002E825B /* Array+Extensions.swift */; };
+		57E563591F29124D002E825B /* ASCollectionNode+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563581F29124D002E825B /* ASCollectionNode+Rx.swift */; };
+		57E563621F291597002E825B /* RxASCollectionDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5635E1F291597002E825B /* RxASCollectionDataSourceProxy.swift */; };
+		57E563631F291597002E825B /* RxASCollectionDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5635F1F291597002E825B /* RxASCollectionDelegateProxy.swift */; };
+		57E563641F291597002E825B /* RxASTableDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563601F291597002E825B /* RxASTableDataSourceProxy.swift */; };
+		57E563651F291597002E825B /* RxASTableDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563611F291597002E825B /* RxASTableDelegateProxy.swift */; };
+		57E563671F29176A002E825B /* RxASCollectionAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563661F29176A002E825B /* RxASCollectionAnimatedDataSource.swift */; };
+		57E563681F2917C6002E825B /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E563031F28FEB3002E825B /* AsyncDisplayKit.framework */; };
+		57E5636A1F291A81002E825B /* ASCollectionNode+SectionViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E563691F291A81002E825B /* ASCollectionNode+SectionViewType.swift */; };
+		57E5636C1F291ACC002E825B /* ASTableNode+SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5636B1F291ACC002E825B /* ASTableNode+SectionedViewType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,22 +197,31 @@
 		574FD4E91F1E6C2500485456 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = "Carthage/Checkouts/RxSwift/build/Debug-iphoneos/RxCocoa.framework"; sourceTree = "<group>"; };
 		574FD4EA1F1E6C2500485456 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = "Carthage/Checkouts/RxDataSources/build/Debug-iphoneos/RxDataSources.framework"; sourceTree = "<group>"; };
 		574FD4EB1F1E6C2500485456 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = "Carthage/Checkouts/RxSwift/build/Debug-iphoneos/RxSwift.framework"; sourceTree = "<group>"; };
-		57A64FF41F1BF28D005C7A79 /* ASDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASDelegateProxy.swift; sourceTree = "<group>"; };
-		57A64FF51F1BF28D005C7A79 /* ASTableNode+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ASTableNode+Rx.swift"; sourceTree = "<group>"; };
-		57A64FF61F1BF28D005C7A79 /* ASTableSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTableSectionedDataSource.swift; sourceTree = "<group>"; };
-		57A64FF71F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableAnimatedDataSource.swift; sourceTree = "<group>"; };
-		57A64FF81F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableDataSourceProxy.swift; sourceTree = "<group>"; };
-		57A64FF91F1BF28D005C7A79 /* RxASTableDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableDataSourceType.swift; sourceTree = "<group>"; };
-		57A64FFA1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableDelegateProxy.swift; sourceTree = "<group>"; };
-		57A64FFB1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableReactiveArrayDataSource.swift; sourceTree = "<group>"; };
-		57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UI+SectionedViewType.swift"; sourceTree = "<group>"; };
+		57A64FFD1F1BF28D005C7A79 /* SectionedViewType+BatchUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SectionedViewType+BatchUpdate.swift"; sourceTree = "<group>"; };
 		57A650201F1BF309005C7A79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57A650211F1BF309005C7A79 /* RxTextureDataSources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxTextureDataSources.h; sourceTree = "<group>"; };
-		57E562FE1F28FADF002E825B /* RxHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
 		57E563031F28FEB3002E825B /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = "../../../../Users/sondt/Library/Developer/Xcode/DerivedData/RxTextureDataSources-hjacuybyhkyzareukzfcxgvmvvmv/Build/Products/Debug-iphonesimulator/AsyncDisplayKit.framework"; sourceTree = "<group>"; };
 		57E563051F28FEBD002E825B /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = "../../../../Users/sondt/Library/Developer/Xcode/DerivedData/RxTextureDataSources-hjacuybyhkyzareukzfcxgvmvvmv/Build/Products/Debug-iphonesimulator/RxSwift.framework"; sourceTree = "<group>"; };
 		57E563071F28FEC4002E825B /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = "../../../../Users/sondt/Library/Developer/Xcode/DerivedData/RxTextureDataSources-hjacuybyhkyzareukzfcxgvmvvmv/Build/Products/Debug-iphonesimulator/RxCocoa.framework"; sourceTree = "<group>"; };
 		57E563091F28FECF002E825B /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = "../../../../Users/sondt/Library/Developer/Xcode/DerivedData/RxTextureDataSources-hjacuybyhkyzareukzfcxgvmvvmv/Build/Products/Debug-iphonesimulator/RxDataSources.framework"; sourceTree = "<group>"; };
+		57E5632B1F290656002E825B /* RxHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
+		57E5632D1F29066F002E825B /* ASDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASDelegateProxy.swift; sourceTree = "<group>"; };
+		57E563401F290718002E825B /* ASTableNode+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ASTableNode+Rx.swift"; sourceTree = "<group>"; };
+		57E563411F290718002E825B /* ASTableSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTableSectionedDataSource.swift; sourceTree = "<group>"; };
+		57E563421F290718002E825B /* RxASTableAnimatedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableAnimatedDataSource.swift; sourceTree = "<group>"; };
+		57E563441F290718002E825B /* RxASTableDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableDataSourceType.swift; sourceTree = "<group>"; };
+		57E563461F290718002E825B /* RxASTableReactiveArrayDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableReactiveArrayDataSource.swift; sourceTree = "<group>"; };
+		57E563501F2907B3002E825B /* RxASCollectionDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASCollectionDataSourceType.swift; sourceTree = "<group>"; };
+		57E563541F290B8D002E825B /* ASCollectionSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASCollectionSectionedDataSource.swift; sourceTree = "<group>"; };
+		57E563561F290FCD002E825B /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		57E563581F29124D002E825B /* ASCollectionNode+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ASCollectionNode+Rx.swift"; sourceTree = "<group>"; };
+		57E5635E1F291597002E825B /* RxASCollectionDataSourceProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASCollectionDataSourceProxy.swift; sourceTree = "<group>"; };
+		57E5635F1F291597002E825B /* RxASCollectionDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASCollectionDelegateProxy.swift; sourceTree = "<group>"; };
+		57E563601F291597002E825B /* RxASTableDataSourceProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableDataSourceProxy.swift; sourceTree = "<group>"; };
+		57E563611F291597002E825B /* RxASTableDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableDelegateProxy.swift; sourceTree = "<group>"; };
+		57E563661F29176A002E825B /* RxASCollectionAnimatedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASCollectionAnimatedDataSource.swift; sourceTree = "<group>"; };
+		57E563691F291A81002E825B /* ASCollectionNode+SectionViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ASCollectionNode+SectionViewType.swift"; sourceTree = "<group>"; };
+		57E5636B1F291ACC002E825B /* ASTableNode+SectionedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ASTableNode+SectionedViewType.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,10 +229,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57E563681F2917C6002E825B /* AsyncDisplayKit.framework in Frameworks */,
 				57E5630A1F28FECF002E825B /* RxDataSources.framework in Frameworks */,
 				57E563081F28FEC4002E825B /* RxCocoa.framework in Frameworks */,
 				57E563061F28FEBD002E825B /* RxSwift.framework in Frameworks */,
-				57E563041F28FEB3002E825B /* AsyncDisplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,16 +433,12 @@
 		57A64FF31F1BF28D005C7A79 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				57A64FF41F1BF28D005C7A79 /* ASDelegateProxy.swift */,
-				57A64FF51F1BF28D005C7A79 /* ASTableNode+Rx.swift */,
-				57A64FF61F1BF28D005C7A79 /* ASTableSectionedDataSource.swift */,
-				57A64FF71F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift */,
-				57A64FF81F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift */,
-				57A64FF91F1BF28D005C7A79 /* RxASTableDataSourceType.swift */,
-				57A64FFA1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift */,
-				57A64FFB1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift */,
-				57A64FFD1F1BF28D005C7A79 /* UI+SectionedViewType.swift */,
-				57E562FE1F28FADF002E825B /* RxHelpers.swift */,
+				57E5635D1F291597002E825B /* RxProxies */,
+				57E5632A1F290649002E825B /* RxHelper */,
+				57E5633E1F290718002E825B /* ASCollectionNode+Rx */,
+				57E5633F1F290718002E825B /* ASTableNode+Rx */,
+				57A64FFD1F1BF28D005C7A79 /* SectionedViewType+BatchUpdate.swift */,
+				57E563561F290FCD002E825B /* Array+Extensions.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -436,6 +450,51 @@
 				57A650211F1BF309005C7A79 /* RxTextureDataSources.h */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		57E5632A1F290649002E825B /* RxHelper */ = {
+			isa = PBXGroup;
+			children = (
+				57E5632B1F290656002E825B /* RxHelpers.swift */,
+				57E5632D1F29066F002E825B /* ASDelegateProxy.swift */,
+			);
+			path = RxHelper;
+			sourceTree = "<group>";
+		};
+		57E5633E1F290718002E825B /* ASCollectionNode+Rx */ = {
+			isa = PBXGroup;
+			children = (
+				57E563581F29124D002E825B /* ASCollectionNode+Rx.swift */,
+				57E563691F291A81002E825B /* ASCollectionNode+SectionViewType.swift */,
+				57E563541F290B8D002E825B /* ASCollectionSectionedDataSource.swift */,
+				57E563501F2907B3002E825B /* RxASCollectionDataSourceType.swift */,
+				57E563661F29176A002E825B /* RxASCollectionAnimatedDataSource.swift */,
+			);
+			path = "ASCollectionNode+Rx";
+			sourceTree = "<group>";
+		};
+		57E5633F1F290718002E825B /* ASTableNode+Rx */ = {
+			isa = PBXGroup;
+			children = (
+				57E563401F290718002E825B /* ASTableNode+Rx.swift */,
+				57E5636B1F291ACC002E825B /* ASTableNode+SectionedViewType.swift */,
+				57E563411F290718002E825B /* ASTableSectionedDataSource.swift */,
+				57E563441F290718002E825B /* RxASTableDataSourceType.swift */,
+				57E563421F290718002E825B /* RxASTableAnimatedDataSource.swift */,
+				57E563461F290718002E825B /* RxASTableReactiveArrayDataSource.swift */,
+			);
+			path = "ASTableNode+Rx";
+			sourceTree = "<group>";
+		};
+		57E5635D1F291597002E825B /* RxProxies */ = {
+			isa = PBXGroup;
+			children = (
+				57E5635E1F291597002E825B /* RxASCollectionDataSourceProxy.swift */,
+				57E5635F1F291597002E825B /* RxASCollectionDelegateProxy.swift */,
+				57E563601F291597002E825B /* RxASTableDataSourceProxy.swift */,
+				57E563611F291597002E825B /* RxASTableDelegateProxy.swift */,
+			);
+			path = RxProxies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -657,16 +716,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57A650041F1BF28D005C7A79 /* RxASTableAnimatedDataSource.swift in Sources */,
-				57A650081F1BF28D005C7A79 /* RxASTableDataSourceType.swift in Sources */,
-				57A650101F1BF28D005C7A79 /* UI+SectionedViewType.swift in Sources */,
-				57A650001F1BF28D005C7A79 /* ASTableNode+Rx.swift in Sources */,
-				57A650061F1BF28D005C7A79 /* RxASTableDataSourceProxy.swift in Sources */,
-				57A6500C1F1BF28D005C7A79 /* RxASTableReactiveArrayDataSource.swift in Sources */,
-				57A6500A1F1BF28D005C7A79 /* RxASTableDelegateProxy.swift in Sources */,
-				57E562FF1F28FADF002E825B /* RxHelpers.swift in Sources */,
-				57A650021F1BF28D005C7A79 /* ASTableSectionedDataSource.swift in Sources */,
-				57A64FFE1F1BF28D005C7A79 /* ASDelegateProxy.swift in Sources */,
+				57E563511F2907B3002E825B /* RxASCollectionDataSourceType.swift in Sources */,
+				57E563571F290FCD002E825B /* Array+Extensions.swift in Sources */,
+				57E563491F290718002E825B /* RxASTableAnimatedDataSource.swift in Sources */,
+				57E563481F290718002E825B /* ASTableSectionedDataSource.swift in Sources */,
+				57E5636A1F291A81002E825B /* ASCollectionNode+SectionViewType.swift in Sources */,
+				57E563651F291597002E825B /* RxASTableDelegateProxy.swift in Sources */,
+				57A650101F1BF28D005C7A79 /* SectionedViewType+BatchUpdate.swift in Sources */,
+				57E5634B1F290718002E825B /* RxASTableDataSourceType.swift in Sources */,
+				57E5634D1F290718002E825B /* RxASTableReactiveArrayDataSource.swift in Sources */,
+				57E5632C1F290656002E825B /* RxHelpers.swift in Sources */,
+				57E563671F29176A002E825B /* RxASCollectionAnimatedDataSource.swift in Sources */,
+				57E563471F290718002E825B /* ASTableNode+Rx.swift in Sources */,
+				57E5632E1F29066F002E825B /* ASDelegateProxy.swift in Sources */,
+				57E5636C1F291ACC002E825B /* ASTableNode+SectionedViewType.swift in Sources */,
+				57E563641F291597002E825B /* RxASTableDataSourceProxy.swift in Sources */,
+				57E563631F291597002E825B /* RxASCollectionDelegateProxy.swift in Sources */,
+				57E563551F290B8D002E825B /* ASCollectionSectionedDataSource.swift in Sources */,
+				57E563591F29124D002E825B /* ASCollectionNode+Rx.swift in Sources */,
+				57E563621F291597002E825B /* RxASCollectionDataSourceProxy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +855,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.dangthaison91.rxtexture.RxTextureDataSources;
 				PRODUCT_NAME = RxTextureDataSources;
@@ -806,6 +875,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.dangthaison91.rxtexture.RxTextureDataSources;
 				PRODUCT_NAME = RxTextureDataSources;
