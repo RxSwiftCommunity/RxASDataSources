@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode8.3
 
 git:
   submodules: false
@@ -14,13 +14,12 @@ env:
     - EXAMPLE_SCHEME="Example"
   matrix:
     - DESTINATION="OS=10.2,name=iPhone 7 Plus"              SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"  BUILD_EXAMPLE="YES" RELEASE_READY="YES" POD_LINT="YES"
-    - DESTINATION="OS=9.0,name=iPhone 6s"                   SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"  BUILD_EXAMPLE="YES" RELEASE_READY="NO"  POD_LINT="NO"
-    - DESTINATION="OS=8.1,name=iPhone 5"                    SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"  BUILD_EXAMPLE="YES" RELEASE_READY="NO"  POD_LINT="NO"
 
 before_install:
-  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
   - brew update
   - brew outdated carthage || brew upgrade carthage
+  - cd RxTextureDataSources && carthage update --platform iOS --no-use-binaries --use-submodules
 
 before_script:
   - sh scripts/bootstrap
@@ -29,13 +28,6 @@ script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
-
-  # Build Framework in Debug and Run Tests if specified
-  - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty -c;
-    else
-      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
-    fi
 
   # Build Framework in Release and Run Tests if specified
   - if [ $RUN_TESTS == "YES" ]; then
