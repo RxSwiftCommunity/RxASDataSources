@@ -1,5 +1,9 @@
 language: objective-c
 osx_image: xcode8.3
+cache:
+  - bundler
+  directories:
+    - Carthage
 
 git:
   submodules: false
@@ -19,10 +23,11 @@ before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - carthage update --platform iOS --no-use-binaries --use-submodules
+  - carthage update --platform iOS --no-use-binaries --use-submodules --cache-builds
+  - pod repo update --silent
 
 before_script:
-  - sh scripts/bootstrap
+  # - sh scripts/bootstrap
 
 script:
   - set -o pipefail
