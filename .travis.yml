@@ -5,8 +5,8 @@ cache:
   - directories:
     - Carthage
 
-git:
-  submodules: false
+# git:
+#   submodules: false
 
 env:
   global:
@@ -15,7 +15,7 @@ env:
     - WORKSPACE=RxTextureDataSources.xcworkspace
     - IOS_FRAMEWORK_SCHEME="RxTextureDataSources-iOS"
     - IOS_SDK=iphonesimulator10.2
-    # - EXAMPLE_SCHEME="Example"
+    - EXAMPLE_SCHEME="Example"
   matrix:
     - DESTINATION="OS=10.2,name=iPhone 7 Plus"              SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"  BUILD_EXAMPLE="YES" RELEASE_READY="YES" POD_LINT="YES"
 
@@ -24,7 +24,7 @@ before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
   - carthage update --platform iOS --no-use-binaries --use-submodules --cache-builds
-  # - pod update
+  - pod repo update
 
 before_script:
   # - sh scripts/bootstrap
@@ -42,9 +42,9 @@ script:
     fi
 
   # Build Example in Debug if specified
-  # - if [ $BUILD_EXAMPLE == "YES" ]; then
-  #    xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
-  #  fi
+  - if [ $BUILD_EXAMPLE == "YES" ]; then
+     xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
+   fi
 
   # Run `pod lib lint` if specified
   - if [ $POD_LINT == "YES" ]; then
