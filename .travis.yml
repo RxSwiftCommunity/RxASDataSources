@@ -5,8 +5,8 @@ cache:
   - directories:
     - Carthage
 
-# git:
-#   submodules: false
+git:
+  submodules: false
 
 env:
   global:
