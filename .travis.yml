@@ -19,7 +19,7 @@ before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - cd RxTextureDataSources && carthage update --platform iOS --no-use-binaries --use-submodules
+  - carthage update --platform iOS --no-use-binaries --use-submodules
 
 before_script:
   - sh scripts/bootstrap
