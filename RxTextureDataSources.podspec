@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
      s.name = 'RxTextureDataSources'
-     s.version = '0.1.2'
+     s.version = '0.1.3'
      s.license = { :type => "MIT", :file => "LICENSE" }
      s.summary = 'RxDataSource for AsyncDisplayKit/Texture view containers'
      s.homepage = 'https://github.com/dangthaison91/RxTextureDataSources'
