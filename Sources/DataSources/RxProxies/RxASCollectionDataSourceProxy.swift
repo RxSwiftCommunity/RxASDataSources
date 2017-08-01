@@ -25,9 +25,8 @@ final class ASCollectionDataSourceNotSet: NSObject, ASCollectionDataSource {
     }
 }
 
-
 /// For more information take a look at `DelegateProxyType`.
-public class  RxASCollectionDataSourceProxy: DelegateProxy, ASCollectionDataSource, DelegateProxyType {
+public class RxASCollectionDataSourceProxy: DelegateProxy, ASCollectionDataSource, DelegateProxyType {
 
     /// Typed parent object.
     public weak private(set) var collectionNode: ASCollectionNode?

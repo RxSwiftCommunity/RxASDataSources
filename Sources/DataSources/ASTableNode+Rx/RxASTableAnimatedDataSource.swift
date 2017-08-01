@@ -35,21 +35,21 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
                     tableNode.reloadData()
                 }
             } else {
-                DispatchQueue.main.async {
-                    let oldSections = dataSource.sectionModels
-                    do {
-                        let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-
+                let oldSections = dataSource.sectionModels
+                do {
+                    let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+                    DispatchQueue.main.async {
                         for difference in differences {
                             dataSource.setSections(difference.finalSections)
                             tableNode.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
                         }
-                    } catch {
-                        rxDebugFatalError("\(error)")
-                        DispatchQueue.main.async {
-                            self.setSections(newSections)
-                            tableNode.reloadData()
-                        }
+                        tableNode.waitUntilAllUpdatesAreCommitted()
+                    }
+                } catch {
+                    rxDebugFatalError("\(error)")
+                    DispatchQueue.main.async {
+                        self.setSections(newSections)
+                        tableNode.reloadData()
                     }
                 }
             }

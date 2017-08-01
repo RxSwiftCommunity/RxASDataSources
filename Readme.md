@@ -39,7 +39,7 @@ $ pod install
 To integrate RxTextureDataSources into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "RxTextureDataSources/RxTextureDataSources" ~> 0.1
+github "dangthaison91/RxTextureDataSources" ~> 0.1
 ```
 
 ## Usage
