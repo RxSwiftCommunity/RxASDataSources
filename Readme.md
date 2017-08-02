@@ -6,7 +6,7 @@
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/RxTextureDataSources.svg)](https://cocoapods.org/pods/RxTextureDataSources)
 [![Travis](https://img.shields.io/travis/RxSwiftCommunity/RxTextureDataSources/master.svg)](https://travis-ci.org/RxSwiftCommunity/RxTextureDataSources/branches)
 
-RxDataSource for AsyncDisplayKit/Texture: ASTableNode & ASCollectionNode
+[RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) for AsyncDisplayKit/Texture: ASTableNode & ASCollectionNode.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
