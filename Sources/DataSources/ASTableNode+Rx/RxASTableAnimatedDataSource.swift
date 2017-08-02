@@ -16,7 +16,8 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
 
     public typealias Element = [S]
     public var animationConfiguration = AnimationConfiguration()
-
+    public var animated: Bool = true
+    
     var dataSet = false
 
     public override init() {
@@ -30,29 +31,22 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
             #endif
             if !self.dataSet {
                 self.dataSet = true
-                DispatchQueue.main.async {
-                    dataSource.setSections(newSections)
-                    tableNode.reloadData()
-                }
+                dataSource.setSections(newSections)
+                tableNode.reloadData()
             } else {
                 let oldSections = dataSource.sectionModels
                 do {
                     let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-                    DispatchQueue.main.async {
-                        for difference in differences {
-                            dataSource.setSections(difference.finalSections)
-                            tableNode.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
-                        }
-                        tableNode.waitUntilAllUpdatesAreCommitted()
+                    for difference in differences {
+                        dataSource.setSections(difference.finalSections)
+                        tableNode.performBatchUpdates(difference, animated: self.animated, animationConfiguration: self.animationConfiguration)
                     }
                 } catch {
                     rxDebugFatalError("\(error)")
-                    DispatchQueue.main.async {
-                        self.setSections(newSections)
-                        tableNode.reloadData()
-                    }
+                    self.setSections(newSections)
+                    tableNode.reloadData()
                 }
             }
-        }.on(observedEvent)
+            }.on(observedEvent)
     }
 }

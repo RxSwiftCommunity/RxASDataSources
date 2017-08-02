@@ -46,7 +46,13 @@ extension ASCollectionNode: SectionedViewType {
     }
 
     public func performBatchUpdates<S: SectionModelType>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
-        self.performBatch(animated: false, updates: {
+        self.performBatch(animated: true, updates: {
+            _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
+        }, completion: nil)
+    }
+
+    public func performBatchUpdates<S: SectionModelType>(_ changes: Changeset<S>, animated: Bool, animationConfiguration: AnimationConfiguration) {
+        self.performBatch(animated: animated, updates: {
             _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
         }, completion: nil)
     }

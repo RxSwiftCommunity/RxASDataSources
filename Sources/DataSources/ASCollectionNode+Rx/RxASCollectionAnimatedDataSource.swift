@@ -16,6 +16,7 @@ open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCo
 
     public typealias Element = [S]
     public var animationConfiguration = AnimationConfiguration()
+    public var animated: Bool = true
 
     var dataSet = false
 
@@ -30,27 +31,21 @@ open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCo
             #endif
             if !self.dataSet {
                 self.dataSet = true
-                DispatchQueue.main.async {
-                    dataSource.setSections(newSections)
-                    collectionNode.reloadData()
-                }
+                dataSource.setSections(newSections)
+                collectionNode.reloadData()
             } else {
                 let oldSections = dataSource.sectionModels
                 do {
                     let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-                    DispatchQueue.main.async {
 
-                        for difference in differences {
-                            dataSource.setSections(difference.finalSections)
-                            collectionNode.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
-                        }
+                    for difference in differences {
+                        dataSource.setSections(difference.finalSections)
+                        collectionNode.performBatchUpdates(difference, animated: self.animated, animationConfiguration: self.animationConfiguration)
                     }
                 } catch {
                     rxDebugFatalError("\(error)")
-                    DispatchQueue.main.async {
-                        self.setSections(newSections)
-                        collectionNode.reloadData()
-                    }
+                    self.setSections(newSections)
+                    collectionNode.reloadData()
                 }
             }
             }.on(observedEvent)

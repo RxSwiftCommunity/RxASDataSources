@@ -20,22 +20,22 @@ func indexSet(_ values: [Int]) -> IndexSet {
 func _performBatchUpdates<V: SectionedViewType, S: SectionModelType>(_ view: V, changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
     typealias I = S.Item
 
-    view.deleteSections(changes.deletedSections, animationStyle: .none)
+    view.deleteSections(changes.deletedSections, animationStyle: .fade)
     // Updated sections doesn't mean reload entire section, somebody needs to update the section view manually
     // otherwise all cells will be reloaded for nothing.
     //view.reloadSections(changes.updatedSections, animationStyle: rowAnimation)
-    view.insertSections(changes.insertedSections, animationStyle: .none)
+    view.insertSections(changes.insertedSections, animationStyle: .fade)
     for (from, to) in changes.movedSections {
         view.moveSection(from, to: to)
     }
 
     view.deleteItemsAtIndexPaths(
         changes.deletedItems.map { IndexPath(item: $0.itemIndex, section: $0.sectionIndex) },
-        animationStyle: .none
+        animationStyle: .fade
     )
     view.insertItemsAtIndexPaths(
         changes.insertedItems.map { IndexPath(item: $0.itemIndex, section: $0.sectionIndex) },
-        animationStyle: .none
+        animationStyle: .fade
     )
     view.reloadItemsAtIndexPaths(
         changes.updatedItems.map { IndexPath(item: $0.itemIndex, section: $0.sectionIndex) },
