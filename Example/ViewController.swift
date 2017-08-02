@@ -30,12 +30,14 @@ struct IntItem {
     let date: Date
 }
 
-extension NumberSection: SectionModelType {
+extension NumberSection: AnimatableSectionModelType {
     typealias Item = IntItem
+    typealias Identity = String
 
     var items: [IntItem] {
         return numbers
     }
+    var identity: String { return header }
 
     init(original: NumberSection, items: [Item]) {
         self = original
@@ -43,10 +45,21 @@ extension NumberSection: SectionModelType {
     }
 }
 
+extension IntItem: IdentifiableType, Equatable {
+    typealias Identity = Int
+    var identity: Int {
+        return number.hashValue
+    }
+}
+
+func ==(lhs: IntItem, rhs: IntItem) -> Bool {
+    return lhs.date == rhs.date && lhs.number == rhs.number
+}
+
 class ViewController: UIViewController {
 
     let tableNode = ASTableNode()
-    private let dataSource = RxASTableReloadDataSource<NumberSection>()
+    private let dataSource = RxASTableAnimatedDataSource<NumberSection>()
 
     private let disposeBag = DisposeBag()
     override func viewDidLoad() {
@@ -55,7 +68,7 @@ class ViewController: UIViewController {
 
         dataSource.configureCell = { (_, tv, ip, i) in
             let cell = ASTextCellNode()
-            cell.text = "\(i)"
+            cell.text = "\(i.number)"
             return cell
         }
 
@@ -63,10 +76,27 @@ class ViewController: UIViewController {
             return dataSource[section].header
         }
 
-        Observable.just(_initialValue)
-            .asObservable()
+        Observable<Int>
+            .interval(2.0, scheduler: MainScheduler.instance)
+            .map { _ in
+                var sectionIndex = Set<Int>()
+                var section = [NumberSection]()
+
+                let numberSections = Int(arc4random_uniform(5)) + 2
+
+                while sectionIndex.count < numberSections {
+                    let random = Int(arc4random_uniform(9))
+                    guard !sectionIndex.contains(random) else { continue }
+
+                    section.append(_initialValue[random])
+                    sectionIndex.insert(random)
+                }
+
+                return section
+            }
             .bind(to: tableNode.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+
     }
 
     override func viewWillLayoutSubviews() {
