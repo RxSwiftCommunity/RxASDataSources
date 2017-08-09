@@ -25,7 +25,7 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
     }
 
     open func tableNode(_ tableNode: ASTableNode, observedEvent: RxSwift.Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, newSections in
+        ASBindingObserver(UIElement: self) { dataSource, newSections in
             #if DEBUG
                 self._dataSourceBound = true
             #endif

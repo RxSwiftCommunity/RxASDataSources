@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57154BFF1F3B28B3008F0E38 /* ASBindingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57154BFE1F3B28B3008F0E38 /* ASBindingObserver.swift */; };
 		57826BA01F29477000FB0414 /* RxASCollectionReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57826B9F1F29477000FB0414 /* RxASCollectionReloadDataSource.swift */; };
 		57826BA21F29485500FB0414 /* RxASTableReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57826BA11F29485500FB0414 /* RxASTableReloadDataSource.swift */; };
 		57826BAA1F29491800FB0414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57826BA91F29491800FB0414 /* AppDelegate.swift */; };
@@ -93,6 +94,7 @@
 		35CD65171E60192300AF060B /* watchOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Framework.xcconfig"; sourceTree = "<group>"; };
 		35CD65181E60192300AF060B /* watchOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		497271B10CB7AAE70BBDEAF0 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57154BFE1F3B28B3008F0E38 /* ASBindingObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASBindingObserver.swift; sourceTree = "<group>"; };
 		57826B9F1F29477000FB0414 /* RxASCollectionReloadDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASCollectionReloadDataSource.swift; sourceTree = "<group>"; };
 		57826BA11F29485500FB0414 /* RxASTableReloadDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxASTableReloadDataSource.swift; sourceTree = "<group>"; };
 		57826BA71F29491800FB0414 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,6 +361,7 @@
 			children = (
 				57E5632B1F290656002E825B /* RxHelpers.swift */,
 				57E5632D1F29066F002E825B /* ASDelegateProxy.swift */,
+				57154BFE1F3B28B3008F0E38 /* ASBindingObserver.swift */,
 			);
 			path = RxHelper;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				57E563571F290FCD002E825B /* Array+Extensions.swift in Sources */,
 				57E563491F290718002E825B /* RxASTableAnimatedDataSource.swift in Sources */,
 				57E563481F290718002E825B /* ASTableSectionedDataSource.swift in Sources */,
+				57154BFF1F3B28B3008F0E38 /* ASBindingObserver.swift in Sources */,
 				57E5636A1F291A81002E825B /* ASCollectionNode+SectionViewType.swift in Sources */,
 				57826BA21F29485500FB0414 /* RxASTableReloadDataSource.swift in Sources */,
 				57E563651F291597002E825B /* RxASTableDelegateProxy.swift in Sources */,
