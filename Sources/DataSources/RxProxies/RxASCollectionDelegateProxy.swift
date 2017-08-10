@@ -47,17 +47,6 @@ public extension Reactive where Base: ASCollectionNode {
         return RxASCollectionDelegateProxy.proxyForObject(base)
     }
 
-    var beginBatchFetch: ControlEvent<ASBatchContext> {
-
-        let source = self.delegate
-            .methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:willBeginBatchFetchWith:)))
-            .map { data in
-                return try castOrThrow(ASBatchContext.self, data[1])
-        }
-
-        return ControlEvent(events: source)
-    }
-
     /// Reactive wrapper for `delegate` message `collectionNode(_:didSelectItemAtIndexPath:)`.
      var itemSelected: ControlEvent<IndexPath> {
         let source = delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:didSelectItemAt:)))
