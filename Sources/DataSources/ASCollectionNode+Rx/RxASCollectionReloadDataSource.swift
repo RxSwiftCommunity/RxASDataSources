@@ -11,7 +11,7 @@ import AsyncDisplayKit
 #if !RX_NO_MODULE
     import RxSwift
     import RxCocoa
-    import RxDataSources
+    import Differentiator
 #endif
 
 open class RxASCollectionReloadDataSource<S: SectionModelType>: ASCollectionSectionedDataSource<S>, RxASCollectionDataSourceType {

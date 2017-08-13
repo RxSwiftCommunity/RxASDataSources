@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import AsyncDisplayKit
-import RxDataSources
+import Differentiator
 
 extension ASCollectionNode: SectionedViewType {
 

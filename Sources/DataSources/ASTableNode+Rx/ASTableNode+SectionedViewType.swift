@@ -8,7 +8,7 @@
 
 import Foundation
 import AsyncDisplayKit
-import RxDataSources
+import Differentiator
 
 extension ASTableNode: SectionedViewType {
 

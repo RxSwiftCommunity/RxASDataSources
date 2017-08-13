@@ -1,6 +1,6 @@
 git "https://chromium.googlesource.com/webm/libwebp" "v0.5.1"
 github "ReactiveX/RxSwift" "3.6.1"
-github "RxSwiftCommunity/RxDataSources" "1.0.4"
+github "RxSwiftCommunity/RxDataSources" "d598b9a12b77971e14d3e6aaee41418ac842445d"
 github "pinterest/PINCache" "3.0.1-beta.5"
 github "pinterest/PINOperation" "1.0.3"
 github "pinterest/PINRemoteImage" "3.0.0-beta.11"

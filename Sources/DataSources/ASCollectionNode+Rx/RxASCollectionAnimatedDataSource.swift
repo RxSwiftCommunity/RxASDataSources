@@ -10,7 +10,7 @@ import Foundation
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
-import RxDataSources
+import Differentiator
 
 open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCollectionSectionedDataSource<S>, RxASCollectionDataSourceType {
 

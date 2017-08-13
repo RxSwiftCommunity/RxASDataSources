@@ -11,7 +11,7 @@ import AsyncDisplayKit
 
 #if !RX_NO_MODULE
     import RxCocoa
-    import RxDataSources
+    import Differentiator
 #endif
 open class _ASTableSectionedDataSource: NSObject, ASTableDataSource {
 

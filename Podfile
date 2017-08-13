@@ -8,7 +8,7 @@ target 'Example' do
   pod 'Texture'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'RxDataSources'
+  pod 'Differentiator', :git =>'https://github.com/RxSwiftCommunity/RxDataSources.git', :branch => 'master'
 
 end
 
