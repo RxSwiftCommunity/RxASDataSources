@@ -1,6 +1,6 @@
 //
 //  RxASCollectionDelegateProxy.swift
-//  RxTextureDataSources
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 7/27/17.
 //  Copyright © 2017 RxSwiftCommunity. All rights reserved.
@@ -14,7 +14,8 @@ import Foundation
     import RxSwift
     import RxCocoa
 #endif
-    /// For more information take a look at `DelegateProxyType`.
+    
+/// For more information take a look at `DelegateProxyType`.
 public class RxASCollectionDelegateProxy: DelegateProxy, DelegateProxyType, ASCollectionDelegate, ASCollectionDelegateFlowLayout {
 
     /// Typed parent object.
@@ -40,25 +41,14 @@ public class RxASCollectionDelegateProxy: DelegateProxy, DelegateProxyType, ASCo
     }
 }
 
-extension Reactive where Base: ASCollectionNode {
+public extension Reactive where Base: ASCollectionNode {
 
     var delegate: DelegateProxy {
         return RxASCollectionDelegateProxy.proxyForObject(base)
     }
 
-    var beginBatchFetch: ControlEvent<ASBatchContext> {
-
-        let source = self.delegate
-            .methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:willBeginBatchFetchWith:)))
-            .map { data in
-                return try castOrThrow(ASBatchContext.self, data[1])
-        }
-
-        return ControlEvent(events: source)
-    }
-
     /// Reactive wrapper for `delegate` message `collectionNode(_:didSelectItemAtIndexPath:)`.
-    public var itemSelected: ControlEvent<IndexPath> {
+     var itemSelected: ControlEvent<IndexPath> {
         let source = delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:didSelectItemAt:)))
             .map { a in
                 return a[1] as! IndexPath
@@ -68,7 +58,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 
     /// Reactive wrapper for `delegate` message `collectionNode(_:didSelectItemAtIndexPath:)`.
-    public var itemDeselected: ControlEvent<IndexPath> {
+     var itemDeselected: ControlEvent<IndexPath> {
         let source = delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:didDeselectItemAt:)))
             .map { a in
                 return a[1] as! IndexPath
@@ -78,7 +68,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 
     /// Reactive wrapper for `delegate` message `collectionNode(_:didHighlightItemAt:)`.
-    public var itemHighlighted: ControlEvent<IndexPath> {
+     var itemHighlighted: ControlEvent<IndexPath> {
         let source = delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:didHighlightItemAt:)))
             .map { a in
                 return try castOrThrow(IndexPath.self, a[1])
@@ -88,7 +78,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 
     /// Reactive wrapper for `delegate` message `collectionNode(_:didUnhighlightItemAt:)`.
-    public var itemUnhighlighted: ControlEvent<IndexPath> {
+     var itemUnhighlighted: ControlEvent<IndexPath> {
         let source = delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:didUnhighlightItemAt:)))
             .map { a in
                 return try castOrThrow(IndexPath.self, a[1])
@@ -98,7 +88,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 
     /// Reactive wrapper for `delegate` message `collectionNode:willDisplay:forItemAt:`.
-    public var willDisplayItem: ControlEvent<ASCellNode> {
+     var willDisplayItem: ControlEvent<ASCellNode> {
         let source: Observable<ASCellNode> = self.delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:willDisplayItemWith:)))
             .map { a in
                 return try castOrThrow(ASCellNode.self, a[1])
@@ -108,7 +98,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 
     /// Reactive wrapper for `delegate` message `collectionNode(_:willDisplaySupplementaryView:forElementKind:at:)`.
-    public var willDisplaySupplementaryElement: ControlEvent<ASCellNode> {
+     var willDisplaySupplementaryElement: ControlEvent<ASCellNode> {
         let source: Observable<ASCellNode> = self.delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:willDisplaySupplementaryElementWith:)))
             .map { a in
                 return try castOrThrow(ASCellNode.self, a[1])
@@ -118,7 +108,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 
     /// Reactive wrapper for `delegate` message `collectionNode:didEndDisplaying:forItemAt:`.
-    public var didEndDisplayingItem: ControlEvent<ASCellNode> {
+     var didEndDisplayingItem: ControlEvent<ASCellNode> {
         let source: Observable<ASCellNode> = self.delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:didEndDisplayingItemWith:)))
             .map { a in
                 return try castOrThrow(ASCellNode.self, a[1])
@@ -128,7 +118,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 
     /// Reactive wrapper for `delegate` message `collectionNode(_:didEndDisplayingSupplementaryView:forElementOfKind:at:)`.
-    public var didEndDisplayingSupplementaryElement: ControlEvent<ASCellNode> {
+     var didEndDisplayingSupplementaryElement: ControlEvent<ASCellNode> {
         let source: Observable<ASCellNode> = self.delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:didEndDisplayingSupplementaryElementWith:)))
             .map { a in
                 return try castOrThrow(ASCellNode.self, a[1])
@@ -146,7 +136,7 @@ extension Reactive where Base: ASCollectionNode {
     ///     collectionNode.rx.modelSelected(MyModel.self)
     ///        .map { ...
     /// ```
-    public func modelSelected<T>(_ modelType: T.Type) -> ControlEvent<T> {
+     func modelSelected<T>(_ modelType: T.Type) -> ControlEvent<T> {
         let source: Observable<T> = itemSelected.flatMap { [weak view = self.base as ASCollectionNode] indexPath -> Observable<T> in
             guard let view = view else {
                 return Observable.empty()
@@ -167,7 +157,7 @@ extension Reactive where Base: ASCollectionNode {
     ///     collectionNode.rx.modelDeselected(MyModel.self)
     ///        .map { ...
     /// ```
-    public func modelDeselected<T>(_ modelType: T.Type) -> ControlEvent<T> {
+     func modelDeselected<T>(_ modelType: T.Type) -> ControlEvent<T> {
         let source: Observable<T> = itemDeselected.flatMap { [weak view = self.base as ASCollectionNode] indexPath -> Observable<T> in
             guard let view = view else {
                 return Observable.empty()
@@ -180,7 +170,7 @@ extension Reactive where Base: ASCollectionNode {
     }
 
     /// Synchronous helper method for retrieving a model at indexPath through a reactive data source
-    public func model<T>(at indexPath: IndexPath) throws -> T {
+     func model<T>(at indexPath: IndexPath) throws -> T {
         let dataSource: SectionedViewDataSourceType = castOrFatalError(self.dataSource.forwardToDelegate(), message: "This method only works in case one of the `rx.itemsWith*` methods was used.")
 
         let element = try dataSource.model(at: indexPath)

@@ -8,6 +8,6 @@ target 'Example' do
   pod 'Texture'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'RxDataSources'
+  pod 'Differentiator'
 
 end

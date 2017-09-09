@@ -1,6 +1,6 @@
 //
 //  ASCollectionSectionedDataSource.swift
-//  RxTextureDataSources
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 7/27/17.
 //  Copyright © 2017 RxSwiftCommunity. All rights reserved.
@@ -10,7 +10,7 @@ import Foundation
 import AsyncDisplayKit
 #if !RX_NO_MODULE
     import RxCocoa
-    import RxDataSources
+    import Differentiator
 #endif
 
 open class _ASCollectionSectionedDataSource: NSObject, ASCollectionDataSource {

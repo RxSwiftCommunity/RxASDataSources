@@ -1,13 +1,13 @@
 //
 //  Array+Extensions.swift
-//  RxTextureDataSources
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 7/27/17.
 //  Copyright © 2017 RxSwiftCommunity. All rights reserved.
 //
 
 import Foundation
-import RxDataSources
+import Differentiator
 
 extension Array where Element: SectionModelType {
     mutating func moveFromSourceIndexPath(_ sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {

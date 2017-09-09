@@ -10,13 +10,14 @@ import Foundation
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
-import RxDataSources
+import Differentiator
 
 open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
 
     public typealias Element = [S]
-    public var animationConfiguration = AnimationConfiguration()
-
+    public var animationConfiguration = RowAnimation()
+    public var animated: Bool = true
+    
     var dataSet = false
 
     public override init() {
@@ -30,29 +31,23 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
             #endif
             if !self.dataSet {
                 self.dataSet = true
-                DispatchQueue.main.async {
-                    dataSource.setSections(newSections)
+                dataSource.setSections(newSections)
+                tableNode.reloadData()
+            } else {
+                let oldSections = dataSource.sectionModels
+                do {
+
+                    let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+                    for difference in differences {
+                        dataSource.setSections(difference.finalSections)
+                        tableNode.performBatchUpdates(difference, animated: self.animated, animationConfiguration: self.animationConfiguration)
+                    }
+                } catch {
+                    rxDebugFatalError("\(error)")
+                    self.setSections(newSections)
                     tableNode.reloadData()
                 }
-            } else {
-                DispatchQueue.main.async {
-                    let oldSections = dataSource.sectionModels
-                    do {
-                        let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-
-                        for difference in differences {
-                            dataSource.setSections(difference.finalSections)
-                            tableNode.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
-                        }
-                    } catch {
-                        rxDebugFatalError("\(error)")
-                        DispatchQueue.main.async {
-                            self.setSections(newSections)
-                            tableNode.reloadData()
-                        }
-                    }
-                }
             }
-        }.on(observedEvent)
+            }.on(observedEvent)
     }
 }

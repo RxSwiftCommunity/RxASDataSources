@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0830"
+   LastUpgradeVersion = "820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "57826BA61F29491800FB0414"
-               BuildableName = "Example.app"
-               BlueprintName = "Example"
-               ReferencedContainer = "container:RxTextureDataSources.xcodeproj">
+               BlueprintIdentifier = "3549BB201DA389CD00C63030"
+               BuildableName = "RxASDataSources.framework"
+               BlueprintName = "RxASDataSources"
+               ReferencedContainer = "container:RxASDataSources.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,14 +28,24 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3549BB601DA38ADB00C63030"
+               BuildableName = "RxTextureDataSourcesTests-iOS.xctest"
+               BlueprintName = "RxTextureDataSourcesTests-iOS"
+               ReferencedContainer = "container:RxASDataSources.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "57826BA61F29491800FB0414"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
-            ReferencedContainer = "container:RxTextureDataSources.xcodeproj">
+            BlueprintIdentifier = "3549BB201DA389CD00C63030"
+            BuildableName = "RxASDataSources.framework"
+            BlueprintName = "RxASDataSources"
+            ReferencedContainer = "container:RxASDataSources.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -51,16 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "57826BA61F29491800FB0414"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
-            ReferencedContainer = "container:RxTextureDataSources.xcodeproj">
+            BlueprintIdentifier = "3549BB201DA389CD00C63030"
+            BuildableName = "RxASDataSources.framework"
+            BlueprintName = "RxASDataSources"
+            ReferencedContainer = "container:RxASDataSources.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "57826BA61F29491800FB0414"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
-            ReferencedContainer = "container:RxTextureDataSources.xcodeproj">
+            BlueprintIdentifier = "3549BB201DA389CD00C63030"
+            BuildableName = "RxASDataSources.framework"
+            BlueprintName = "RxASDataSources"
+            ReferencedContainer = "container:RxASDataSources.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
