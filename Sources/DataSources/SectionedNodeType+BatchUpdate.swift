@@ -18,6 +18,20 @@ func indexSet(_ values: [Int]) -> IndexSet {
     return indexSet as IndexSet
 }
 
+public struct RowAnimation {
+    public let insertAnimation: UITableViewRowAnimation
+    public let reloadAnimation: UITableViewRowAnimation
+    public let deleteAnimation: UITableViewRowAnimation
+
+    public init(insertAnimation: UITableViewRowAnimation = .automatic,
+                reloadAnimation: UITableViewRowAnimation = .automatic,
+                deleteAnimation: UITableViewRowAnimation = .automatic) {
+        self.insertAnimation = insertAnimation
+        self.reloadAnimation = reloadAnimation
+        self.deleteAnimation = deleteAnimation
+    }
+}
+
 public protocol SectionedNodeType {
     func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation)
     func deleteItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation)
@@ -35,26 +49,26 @@ public protocol SectionedNodeType {
 func _performBatchUpdates<V: SectionedNodeType, S: SectionModelType>(_ view: V, changes: Changeset<S>, animationConfiguration: RowAnimation) {
     typealias I = S.Item
 
-    view.deleteSections(changes.deletedSections, animationStyle: .fade)
+    view.deleteSections(changes.deletedSections, animationStyle: animationConfiguration.deleteAnimation)
     // Updated sections doesn't mean reload entire section, somebody needs to update the section view manually
     // otherwise all cells will be reloaded for nothing.
     //view.reloadSections(changes.updatedSections, animationStyle: rowAnimation)
-    view.insertSections(changes.insertedSections, animationStyle: .fade)
+    view.insertSections(changes.insertedSections, animationStyle: animationConfiguration.insertAnimation)
     for (from, to) in changes.movedSections {
         view.moveSection(from, to: to)
     }
 
     view.deleteItemsAtIndexPaths(
         changes.deletedItems.map { IndexPath(item: $0.itemIndex, section: $0.sectionIndex) },
-        animationStyle: .fade
+        animationStyle: animationConfiguration.deleteAnimation
     )
     view.insertItemsAtIndexPaths(
         changes.insertedItems.map { IndexPath(item: $0.itemIndex, section: $0.sectionIndex) },
-        animationStyle: .fade
+        animationStyle: animationConfiguration.insertAnimation
     )
     view.reloadItemsAtIndexPaths(
         changes.updatedItems.map { IndexPath(item: $0.itemIndex, section: $0.sectionIndex) },
-        animationStyle: .fade
+        animationStyle: animationConfiguration.reloadAnimation
     )
 
     for (from, to) in changes.movedItems {

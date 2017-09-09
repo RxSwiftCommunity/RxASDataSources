@@ -12,20 +12,6 @@ import RxSwift
 import RxCocoa
 import Differentiator
 
-public struct RowAnimation {
-    public let insertAnimation: UITableViewRowAnimation
-    public let reloadAnimation: UITableViewRowAnimation
-    public let deleteAnimation: UITableViewRowAnimation
-
-    public init(insertAnimation: UITableViewRowAnimation = .automatic,
-                reloadAnimation: UITableViewRowAnimation = .automatic,
-                deleteAnimation: UITableViewRowAnimation = .automatic) {
-        self.insertAnimation = insertAnimation
-        self.reloadAnimation = reloadAnimation
-        self.deleteAnimation = deleteAnimation
-    }
-}
-
 open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
 
     public typealias Element = [S]
