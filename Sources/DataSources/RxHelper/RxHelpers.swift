@@ -1,6 +1,6 @@
 //
 //  RxHelpers.swift
-//  RxTextureDataSources
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 7/15/17.
 //  Copyright © 2017 Dang Thai Son. All rights reserved.

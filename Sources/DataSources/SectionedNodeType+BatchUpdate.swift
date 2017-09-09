@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import RxDataSources
+import UIKit
+import Differentiator
 
 func indexSet(_ values: [Int]) -> IndexSet {
     let indexSet = NSMutableIndexSet()
@@ -17,7 +18,21 @@ func indexSet(_ values: [Int]) -> IndexSet {
     return indexSet as IndexSet
 }
 
-func _performBatchUpdates<V: SectionedViewType, S: SectionModelType>(_ view: V, changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
+public protocol SectionedNodeType {
+    func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation)
+    func deleteItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation)
+    func moveItemAtIndexPath(_ from: IndexPath, to: IndexPath)
+    func reloadItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation)
+
+    func insertSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
+    func deleteSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
+    func moveSection(_ from: Int, to: Int)
+    func reloadSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
+
+    func performBatchUpdates<S>(_ changes: Changeset<S>, animated: Bool, animationConfiguration: RowAnimation)
+}
+
+func _performBatchUpdates<V: SectionedNodeType, S: SectionModelType>(_ view: V, changes: Changeset<S>, animationConfiguration: RowAnimation) {
     typealias I = S.Item
 
     view.deleteSections(changes.deletedSections, animationStyle: .fade)

@@ -1,6 +1,6 @@
 //
 //  RxASCollectionDataSourceProxy.swift
-//  RxTextureDataSources
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 7/27/17.
 //  Copyright © 2017 RxSwiftCommunity. All rights reserved.

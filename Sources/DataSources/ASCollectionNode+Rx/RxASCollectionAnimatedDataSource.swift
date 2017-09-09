@@ -1,6 +1,6 @@
 //
 //  RxASCollectionAnimatedDataSource.swift
-//  RxTextureDataSources
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 7/27/17.
 //  Copyright © 2017 RxSwiftCommunity. All rights reserved.
@@ -15,7 +15,7 @@ import Differentiator
 open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCollectionSectionedDataSource<S>, RxASCollectionDataSourceType {
 
     public typealias Element = [S]
-    public var animationConfiguration = AnimationConfiguration()
+    public var animationConfiguration = RowAnimation()
     public var animated: Bool = true
 
     var dataSet = false
@@ -36,7 +36,7 @@ open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCo
             } else {
                 let oldSections = dataSource.sectionModels
                 do {
-                    let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+                    let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
                     for difference in differences {
                         dataSource.setSections(difference.finalSections)
