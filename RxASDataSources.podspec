@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
-     s.name = 'RxTextureDataSources'
-     s.version = '0.1.4'
+     s.name = 'RxASDataSources'
+     s.version = '0.2'
      s.license = { :type => "MIT", :file => "LICENSE" }
-     s.summary = 'RxDataSource for AsyncDisplayKit/Texture view containers'
-     s.homepage = 'https://github.com/dangthaison91/RxTextureDataSources'
+     s.summary = 'RxDataSources for AsyncDisplayKit/Texture ASTableNode/ASCollectionNode'
+     s.homepage = 'https://github.com/dangthaison91/RxASDataSources'
      s.social_media_url = 'https://twitter.com/dangthaison91'
      s.authors = { "Dang Thai Son" => "dangthaison.91@gmail.com" }
-     s.source = { :git => "https://github.com/dangthaison91/RxTextureDataSources.git", :tag => s.version.to_s }
+     s.source = { :git => "https://github.com/dangthaison91/RxASDataSources.git", :tag => s.version.to_s }
      s.platforms     = { :ios => "8.0" }
      s.requires_arc = true
 
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
      s.framework  = "Foundation"
      s.dependency 'RxSwift', '~> 3.4'
      s.dependency 'RxCocoa', '~> 3.4'
-     s.dependency 'RxDataSources', '~> 1.0'
+     s.dependency 'Differentiator', '~> 2.0'
      s.dependency 'Texture', '~> 2.0'
 
 end

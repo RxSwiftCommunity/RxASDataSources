@@ -10,12 +10,26 @@ import Foundation
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
-import RxDataSources
+import Differentiator
+
+public struct RowAnimation {
+    public let insertAnimation: UITableViewRowAnimation
+    public let reloadAnimation: UITableViewRowAnimation
+    public let deleteAnimation: UITableViewRowAnimation
+
+    public init(insertAnimation: UITableViewRowAnimation = .automatic,
+                reloadAnimation: UITableViewRowAnimation = .automatic,
+                deleteAnimation: UITableViewRowAnimation = .automatic) {
+        self.insertAnimation = insertAnimation
+        self.reloadAnimation = reloadAnimation
+        self.deleteAnimation = deleteAnimation
+    }
+}
 
 open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
 
     public typealias Element = [S]
-    public var animationConfiguration = AnimationConfiguration()
+    public var animationConfiguration = RowAnimation()
     public var animated: Bool = true
     
     var dataSet = false
@@ -36,7 +50,8 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
             } else {
                 let oldSections = dataSource.sectionModels
                 do {
-                    let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+
+                    let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
                     for difference in differences {
                         dataSource.setSections(difference.finalSections)
                         tableNode.performBatchUpdates(difference, animated: self.animated, animationConfiguration: self.animationConfiguration)

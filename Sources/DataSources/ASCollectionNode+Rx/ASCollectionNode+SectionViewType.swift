@@ -1,6 +1,6 @@
 //
 //  ASCollectionNode+SectionViewType.swift
-//  RxTextureDataSources
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 7/27/17.
 //  Copyright © 2017 RxSwiftCommunity. All rights reserved.
@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 import AsyncDisplayKit
-import RxDataSources
+import Differentiator
 
-extension ASCollectionNode: SectionedViewType {
+extension ASCollectionNode: SectionedNodeType {
 
     public func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation) {
         self.insertItems(at: paths)
@@ -45,13 +45,7 @@ extension ASCollectionNode: SectionedViewType {
         self.reloadSections(indexSet(sections))
     }
 
-    public func performBatchUpdates<S: SectionModelType>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
-        self.performBatch(animated: true, updates: {
-            _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
-        }, completion: nil)
-    }
-
-    public func performBatchUpdates<S: SectionModelType>(_ changes: Changeset<S>, animated: Bool, animationConfiguration: AnimationConfiguration) {
+    public func performBatchUpdates<S: SectionModelType>(_ changes: Changeset<S>, animated: Bool, animationConfiguration: RowAnimation) {
         self.performBatch(animated: animated, updates: {
             _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
         }, completion: nil)

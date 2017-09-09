@@ -1,6 +1,6 @@
 //
 //  RxASCollectionDelegateProxy.swift
-//  RxTextureDataSources
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 7/27/17.
 //  Copyright © 2017 RxSwiftCommunity. All rights reserved.
@@ -45,17 +45,6 @@ public extension Reactive where Base: ASCollectionNode {
 
     var delegate: DelegateProxy {
         return RxASCollectionDelegateProxy.proxyForObject(base)
-    }
-
-    var beginBatchFetch: ControlEvent<ASBatchContext> {
-
-        let source = self.delegate
-            .methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:willBeginBatchFetchWith:)))
-            .map { data in
-                return try castOrThrow(ASBatchContext.self, data[1])
-        }
-
-        return ControlEvent(events: source)
     }
 
     /// Reactive wrapper for `delegate` message `collectionNode(_:didSelectItemAtIndexPath:)`.

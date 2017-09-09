@@ -41,17 +41,6 @@ public extension Reactive where Base: ASTableNode {
         return RxASTableDelegateProxy.proxyForObject(base)
     }
 
-    var beginBatchFetch: ControlEvent<ASBatchContext> {
-
-        let source = self.delegate
-            .methodInvoked(#selector(ASTableDelegate.tableNode(_:willBeginBatchFetchWith:)))
-            .map { data in
-                return try castOrThrow(ASBatchContext.self, data[1])
-        }
-
-        return ControlEvent(events: source)
-    }
-
     // Event
     /**
      Reactive wrapper for `delegate` message `tableNode:didSelectRowAtIndexPath:`.

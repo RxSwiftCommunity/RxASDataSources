@@ -8,14 +8,6 @@ target 'Example' do
   pod 'Texture'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'RxDataSources'
-
-end
-
-target 'RxTextureDataSources-iOS' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for RxTextureDataSources-iOS
+  pod 'Differentiator'
 
 end

@@ -1,6 +1,6 @@
 //
-//  RxTextureDataSourcesSpec.swift
-//  RxTextureDataSources
+//  RxASDataSourcesSpec.swift
+//  RxASDataSources
 //
 //  Created by Dang Thai Son on 04/10/16.
 //  Copyright © 2017 RxSwiftCommunity. All rights reserved.
@@ -8,15 +8,15 @@
 
 import Quick
 import Nimble
-@testable import RxTextureDataSources
+@testable import RxASDataSources
 
-class RxTextureDataSourcesSpec: QuickSpec {
+class RxASDataSourcesSpec: QuickSpec {
 
     override func spec() {
 
-        describe("RxTextureDataSourcesSpec") {
+        describe("RxASDataSourcesSpec") {
             it("works") {
-                expect("RxTextureDataSources") == "RxTextureDataSources"
+                expect("RxASDataSources") == "RxASDataSources"
             }
         }
 
