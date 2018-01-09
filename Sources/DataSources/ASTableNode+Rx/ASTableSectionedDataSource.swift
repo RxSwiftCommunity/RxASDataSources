@@ -18,7 +18,7 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     public typealias I = S.Item
     public typealias Section = S
     
-    public typealias ConfigureNode = (ASTableSectionedDataSource<S>, ASTableNode, IndexPath, I) -> ASCellNode
+    public typealias ConfigureCell = (ASTableSectionedDataSource<S>, ASTableNode, IndexPath, I) -> ASCellNode
     public typealias TitleForHeaderInSection = (ASTableSectionedDataSource<S>, Int) -> String?
     public typealias TitleForFooterInSection = (ASTableSectionedDataSource<S>, Int) -> String?
     public typealias CanEditRowAtIndexPath = (ASTableSectionedDataSource<S>, IndexPath) -> Bool
@@ -31,7 +31,7 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     
     #if os(iOS)
     public init(
-        configureNode: @escaping ConfigureNode,
+        configureCell: @escaping ConfigureCell,
         titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
         titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
         canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
@@ -39,7 +39,7 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
         sectionIndexTitles: @escaping SectionIndexTitles = { _ in nil },
         sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index }
         ) {
-        self.configureNode = configureNode
+        self.configureCell = configureCell
         self.titleForHeaderInSection = titleForHeaderInSection
         self.titleForFooterInSection = titleForFooterInSection
         self.canEditRowAtIndexPath = canEditRowAtIndexPath
@@ -49,7 +49,7 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     }
     #else
     public init(
-        configureNode: @escaping ConfigureNode,
+        configureCell: @escaping ConfigureCell,
         titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
         titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
         canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
@@ -113,7 +113,7 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
 
-    open var configureNode: ConfigureNode {
+    open var configureCell: ConfigureCell {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -182,7 +182,7 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     open func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
         
-        return configureNode(self, tableNode, indexPath, self[indexPath])
+        return configureCell(self, tableNode, indexPath, self[indexPath])
     }
     
     open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

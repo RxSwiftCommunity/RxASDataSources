@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.view.addSubnode(tableNode)
 
-        let configureNode: ASTableSectionedDataSource<NumberSection>.ConfigureNode = { (_, tableNode, index, i) in
+        let configureCell: ASTableSectionedDataSource<NumberSection>.ConfigureCell = { (_, tableNode, index, i) in
             let cell = ASTextCellNode()
             cell.text = "\(i.number)"
             return cell
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
             return dataSource[section].header
         }
 
-        let dataSource = RxASTableAnimatedDataSource<NumberSection>(configureNode: configureNode, titleForHeaderInSection: titleForHeaderInSection)
+        let dataSource = RxASTableAnimatedDataSource<NumberSection>(configureCell: configureCell, titleForHeaderInSection: titleForHeaderInSection)
 
         Observable<Int>
             .interval(2.0, scheduler: MainScheduler.instance)

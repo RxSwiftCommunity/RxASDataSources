@@ -30,7 +30,7 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
     public init(
         animationConfiguration: RowAnimation = RowAnimation(),
         animationType: @escaping AnimationType = { _, _, _ in .animated },
-        configureNode: @escaping ConfigureNode,
+        configureCell: @escaping ConfigureCell,
         titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
         titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
         canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
@@ -42,7 +42,7 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
         self.animationType = animationType
         
         super.init(
-            configureNode: configureNode,
+            configureCell: configureCell,
             titleForHeaderInSection: titleForHeaderInSection,
             titleForFooterInSection: titleForFooterInSection,
             canEditRowAtIndexPath: canEditRowAtIndexPath,
@@ -55,7 +55,7 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
     public init(
         animationConfiguration: AnimationConfiguration = RowAnimation(),
         animationType: @escaping AnimationType = { _, _, _ in .animated },
-        configureNode: @escaping ConfigureNode,
+        configureCell: @escaping ConfigureCell,
         titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
         titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
         canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },

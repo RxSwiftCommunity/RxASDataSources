@@ -15,13 +15,34 @@ import Differentiator
 open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCollectionSectionedDataSource<S>, RxASCollectionDataSourceType {
 
     public typealias Element = [S]
-    public var animationConfiguration = RowAnimation()
+    public typealias AnimationType = (ASCollectionSectionedDataSource<S>, ASCollectionNode, [Changeset<S>]) -> AnimationTransition
+    
+    /// Animation configuration for data source
+    public var animationConfiguration: RowAnimation
+    
+    /// Calculates view transition depending on type of changes
+    public var animationType: AnimationType
+    
     public var animated: Bool = true
+    private var dataSet = false
 
-    var dataSet = false
-
-    public override init() {
-        super.init()
+    public init(
+        animationConfiguration: RowAnimation = RowAnimation(),
+        animationType: @escaping AnimationType = { _, _, _ in .animated },
+        configureCell: @escaping ConfigureCell,
+        configureSupplementaryView: ConfigureSupplementaryView? = nil,
+        moveItem: @escaping MoveItem = { _, _, _ in () },
+        canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
+        ) {
+        
+        self.animationConfiguration = animationConfiguration
+        self.animationType = animationType
+        super.init(
+            configureCell: configureCell,
+            configureSupplementaryView: configureSupplementaryView,
+            moveItem: moveItem,
+            canMoveItemAtIndexPath: canMoveItemAtIndexPath
+        )
     }
 
     open func collectionNode(_ collectionNode: ASCollectionNode, observedEvent: RxSwift.Event<Element>) {
@@ -37,10 +58,16 @@ open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCo
                 let oldSections = dataSource.sectionModels
                 do {
                     let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-
-                    for difference in differences {
-                        dataSource.setSections(difference.finalSections)
-                        collectionNode.performBatchUpdates(difference, animated: self.animated, animationConfiguration: self.animationConfiguration)
+                    switch self.animationType(self, collectionNode, differences) {
+                    case .animated:
+                        for difference in differences {
+                            dataSource.setSections(difference.finalSections)
+                            collectionNode.performBatchUpdates(difference, animated: self.animated, animationConfiguration: self.animationConfiguration)
+                        }
+                    case .reload:
+                        self.setSections(newSections)
+                        collectionNode.reloadData()
+                        return
                     }
                 } catch {
                     rxDebugFatalError("\(error)")

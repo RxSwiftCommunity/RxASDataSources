@@ -17,10 +17,6 @@ import AsyncDisplayKit
 open class RxASCollectionReloadDataSource<S: SectionModelType>: ASCollectionSectionedDataSource<S>, RxASCollectionDataSourceType {
     public typealias Element = [S]
 
-    public override init() {
-        super.init()
-    }
-
     open func collectionNode(_ collectionNode: ASCollectionNode, observedEvent: RxSwift.Event<Element>) -> Void {
         Binder(self) { dataSource, element in
             #if DEBUG
