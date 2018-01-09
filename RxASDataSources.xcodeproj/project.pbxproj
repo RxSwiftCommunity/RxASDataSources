@@ -58,6 +58,8 @@
 		6A520ADB1831906E0BCC284C /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497271B10CB7AAE70BBDEAF0 /* Pods_Example.framework */; };
 		ACB28E05200527CB0076CAC5 /* AnimationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB28E03200524DB0076CAC5 /* AnimationTransition.swift */; };
 		ACB28E0720052A2C0076CAC5 /* ASCollectionNode+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB28E0620052A2C0076CAC5 /* ASCollectionNode+Rx.swift */; };
+		ACB28E0820052B520076CAC5 /* ASCollectionNode+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB28E0620052A2C0076CAC5 /* ASCollectionNode+Rx.swift */; };
+		ACB28E0920052B570076CAC5 /* AnimationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB28E03200524DB0076CAC5 /* AnimationTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -623,6 +625,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57826BC91F294DD600FB0414 /* ASTableNode+Rx.swift in Sources */,
+				ACB28E0820052B520076CAC5 /* ASCollectionNode+Rx.swift in Sources */,
 				57826BCB1F294DD600FB0414 /* ASTableSectionedDataSource.swift in Sources */,
 				57826BD01F294DD600FB0414 /* Array+Extensions.swift in Sources */,
 				57826BC61F294DD200FB0414 /* RxASCollectionDataSourceType.swift in Sources */,
@@ -635,6 +638,7 @@
 				57826BCF1F294DD600FB0414 /* SectionedNodeType+BatchUpdate.swift in Sources */,
 				57826BD11F294E4F00FB0414 /* RxASTableReloadDataSource.swift in Sources */,
 				57826BCD1F294DD600FB0414 /* RxASTableAnimatedDataSource.swift in Sources */,
+				ACB28E0920052B570076CAC5 /* AnimationTransition.swift in Sources */,
 				57826BBE1F294DC800FB0414 /* RxASCollectionDelegateProxy.swift in Sources */,
 				57826BBF1F294DC800FB0414 /* RxASTableDataSourceProxy.swift in Sources */,
 				57826BAA1F29491800FB0414 /* AppDelegate.swift in Sources */,
