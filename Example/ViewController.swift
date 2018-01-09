@@ -65,13 +65,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.view.addSubnode(tableNode)
 
-        let configureNode: RxASTableAnimatedDataSource<NumberSection>.ConfigureNode = { (_, tableNode, index, i) in
+        let configureNode: ASTableSectionedDataSource<NumberSection>.ConfigureNode = { (_, tableNode, index, i) in
             let cell = ASTextCellNode()
             cell.text = "\(i.number)"
             return cell
         }
         
-        let titleForHeaderInSection: RxASTableAnimatedDataSource<NumberSection>.TitleForHeaderInSection = { (dataSource, section) -> String? in
+        let titleForHeaderInSection: ASTableSectionedDataSource<NumberSection>.TitleForHeaderInSection = { (dataSource, section) -> String? in
             return dataSource[section].header
         }
 

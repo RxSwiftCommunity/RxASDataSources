@@ -86,7 +86,6 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
             } else {
                 let oldSections = dataSource.sectionModels
                 do {
-
                     let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
                     switch self.animationType(self, tableNode, differences) {
                     case .animated:
