@@ -11,27 +11,6 @@ import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 
-public extension ASTableNode {
-
-    /**
-     Factory method that enables subclasses to implement their own `delegate`.
-
-     - returns: Instance of delegate proxy that wraps `delegate`.
-     */
-    public func createRxDelegateProxy() -> RxASTableDelegateProxy {
-        return RxASTableDelegateProxy(parentObject: self)
-    }
-
-    /**
-     Factory method that enables subclasses to implement their own `rx.dataSource`.
-
-     - returns: Instance of delegate proxy that wraps `dataSource`.
-     */
-    public func createRxDataSourceProxy() -> RxASTableDataSourceProxy {
-        return RxASTableDataSourceProxy(parentObject: self)
-    }
-}
-
 public extension Reactive where Base: ASTableNode {
     func items<DataSource: RxASTableDataSourceType & ASTableDataSource, O: ObservableType>(dataSource: DataSource)
         -> (_ source: O)
@@ -51,15 +30,14 @@ public extension Reactive where Base: ASTableNode {
     }
 }
 
-
 public extension Reactive where Base: ASTableNode {
     /**
      Reactive wrapper for `dataSource`.
 
      For more information take a look at `DelegateProxyType` protocol documentation.
      */
-    public var dataSource: RxASTableDataSourceProxy {
-        return RxASTableDataSourceProxy.proxyForObject(base)
+    public var dataSource: DelegateProxy<ASTableNode, ASTableDataSource> {
+        return RxASTableDataSourceProxy.proxy(for: base)
     }
 
     /**
@@ -76,4 +54,3 @@ public extension Reactive where Base: ASTableNode {
             return RxASTableDataSourceProxy.installForwardDelegate(dataSource, retainDelegate: false, onProxyForObject: self.base)
     }
 }
-    

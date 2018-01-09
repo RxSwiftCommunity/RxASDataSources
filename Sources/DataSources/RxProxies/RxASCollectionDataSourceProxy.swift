@@ -9,9 +9,10 @@
 import Foundation
 import AsyncDisplayKit
 #if !RX_NO_MODULE
-    import RxSwift
-    import RxCocoa
+import RxSwift
+import RxCocoa
 #endif
+
 let collectionDataSourceNotSet = ASCollectionDataSourceNotSet()
 
 final class ASCollectionDataSourceNotSet: NSObject, ASCollectionDataSource {
@@ -25,63 +26,41 @@ final class ASCollectionDataSourceNotSet: NSObject, ASCollectionDataSource {
     }
 }
 
-/// For more information take a look at `DelegateProxyType`.
-public class RxASCollectionDataSourceProxy: DelegateProxy, ASCollectionDataSource, DelegateProxyType {
+extension ASCollectionNode: HasDataSource {
+    public typealias DataSource = ASCollectionDataSource
+}
 
+/// For more information take a look at `DelegateProxyType`.
+public class RxASCollectionDataSourceProxy: DelegateProxy<ASCollectionNode, ASCollectionDataSource>, ASCollectionDataSource, DelegateProxyType {
+    
     /// Typed parent object.
     public weak private(set) var collectionNode: ASCollectionNode?
 
-    private weak var _requiredMethodsDataSource: ASCollectionDataSource? = collectionDataSourceNotSet
-
-    /// Initializes `RxCollectionViewDataSourceProxy`
-    ///
-    /// - parameter parentObject: Parent object for delegate proxy.
-    public required init(parentObject: AnyObject) {
-        self.collectionNode = castOrFatalError(parentObject)
-        super.init(parentObject: parentObject)
+    /// Initializes `RxASCollectionDataSourceProxy`
+    public init(collectionNode: ASCollectionNode) {
+        self.collectionNode = collectionNode
+        super.init(parentObject: collectionNode, delegateProxy: RxASCollectionDataSourceProxy.self)
     }
 
-    // MARK: delegate
+    public static func registerKnownImplementations() {
+        self.register { RxASCollectionDataSourceProxy(collectionNode: $0) }
+    }
 
-    /// Required delegate method implementation.
+    public override func setForwardToDelegate(_ forwardToDelegate: ASCollectionDataSource?, retainDelegate: Bool) {
+        super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
+    }
+
+    // MARK: DataSource
+    private weak var _requiredMethodsDataSource: ASCollectionDataSource? = collectionDataSourceNotSet
+
+    /// Required data source method implementation.
     public func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
         return (_requiredMethodsDataSource ?? collectionDataSourceNotSet).collectionNode!(collectionNode, numberOfItemsInSection: section)
     }
 
-    /// Required delegate method implementation.
+    /// Required data source method implementation.
     public func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
         return (_requiredMethodsDataSource ?? collectionDataSourceNotSet).collectionNode!(collectionNode, nodeForItemAt: indexPath)
     }
-
-    // MARK: proxy
-
-    /// For more information take a look at `DelegateProxyType`.
-    public override class func createProxyForObject(_ object: AnyObject) -> AnyObject {
-        let collectionNode: ASCollectionNode = castOrFatalError(object)
-        return collectionNode.createRxDataSourceProxy()
-    }
-
-    /// For more information take a look at `DelegateProxyType`.
-    public override class func delegateAssociatedObjectTag() -> UnsafeRawPointer {
-        return ASDataSourceAssociatedTag
-    }
-
-    /// For more information take a look at `DelegateProxyType`.
-    public class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
-        let collectionNode: ASCollectionNode = castOrFatalError(object)
-        collectionNode.dataSource = castOptionalOrFatalError(delegate)
-    }
-
-    /// For more information take a look at `DelegateProxyType`.
-    public class func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
-        let collectionNode: ASCollectionNode = castOrFatalError(object)
-        return collectionNode.dataSource
-    }
-
-    /// For more information take a look at `DelegateProxyType`.
-    public override func setForwardToDelegate(_ forwardToDelegate: AnyObject?, retainDelegate: Bool) {
-        let requiredMethodsDataSource: ASCollectionDataSource? = castOptionalOrFatalError(forwardToDelegate)
-        _requiredMethodsDataSource = requiredMethodsDataSource ?? collectionDataSourceNotSet
-        super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
-    }
+    
 }

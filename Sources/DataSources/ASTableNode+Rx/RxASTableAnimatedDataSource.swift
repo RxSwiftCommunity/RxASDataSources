@@ -15,17 +15,67 @@ import Differentiator
 open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
 
     public typealias Element = [S]
-    public var animationConfiguration = RowAnimation()
-    public var animated: Bool = true
-    
-    var dataSet = false
+    public typealias AnimationType = (ASTableSectionedDataSource<S>, ASTableNode, [Changeset<S>]) -> AnimationTransition
 
-    public override init() {
-        super.init()
+    /// Animation configuration for data source
+    public var animationConfiguration: RowAnimation
+    
+    /// Calculates view transition depending on type of changes
+    public var animationType: AnimationType
+
+    public var animated: Bool = true
+    private var dataSet = false
+
+    #if os(iOS)
+    public init(
+        animationConfiguration: RowAnimation = RowAnimation(),
+        animationType: @escaping AnimationType = { _, _, _ in .animated },
+        configureNode: @escaping ConfigureNode,
+        titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
+        titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
+        canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
+        canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false },
+        sectionIndexTitles: @escaping SectionIndexTitles = { _ in nil },
+        sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index }
+        ) {
+        self.animationConfiguration = animationConfiguration
+        self.animationType = animationType
+        
+        super.init(
+            configureNode: configureNode,
+            titleForHeaderInSection: titleForHeaderInSection,
+            titleForFooterInSection: titleForFooterInSection,
+            canEditRowAtIndexPath: canEditRowAtIndexPath,
+            canMoveRowAtIndexPath: canMoveRowAtIndexPath,
+            sectionIndexTitles: sectionIndexTitles,
+            sectionForSectionIndexTitle: sectionForSectionIndexTitle
+        )
     }
+    #else
+    public init(
+        animationConfiguration: AnimationConfiguration = RowAnimation(),
+        animationType: @escaping AnimationType = { _, _, _ in .animated },
+        configureNode: @escaping ConfigureNode,
+        titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
+        titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
+        canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
+        canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false }
+    ) {
+    self.animationConfiguration = animationConfiguration
+    self.animationType = animationType
+    
+    super.init(
+        configureCell: configureCell,
+        titleForHeaderInSection: titleForHeaderInSection,
+        titleForFooterInSection: titleForFooterInSection,
+        canEditRowAtIndexPath: canEditRowAtIndexPath,
+        canMoveRowAtIndexPath: canMoveRowAtIndexPath
+    )
+    }
+    #endif
 
     open func tableNode(_ tableNode: ASTableNode, observedEvent: RxSwift.Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, newSections in
+        Binder(self) { dataSource, newSections in
             #if DEBUG
                 self._dataSourceBound = true
             #endif
@@ -38,9 +88,16 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
                 do {
 
                     let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-                    for difference in differences {
-                        dataSource.setSections(difference.finalSections)
-                        tableNode.performBatchUpdates(difference, animated: self.animated, animationConfiguration: self.animationConfiguration)
+                    switch self.animationType(self, tableNode, differences) {
+                    case .animated:
+                        for difference in differences {
+                            dataSource.setSections(difference.finalSections)
+                            tableNode.performBatchUpdates(difference, animated: self.animated, animationConfiguration: self.animationConfiguration)
+                        }
+                    case .reload:
+                        self.setSections(newSections)
+                        tableNode.reloadData()
+                        return
                     }
                 } catch {
                     rxDebugFatalError("\(error)")

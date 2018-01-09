@@ -8,77 +8,61 @@
 
 import Foundation
 import AsyncDisplayKit
-
 #if !RX_NO_MODULE
     import RxCocoa
     import Differentiator
 #endif
-open class _ASTableSectionedDataSource: NSObject, ASTableDataSource {
 
-    @nonobjc open func _rx_numberOfSections(in tableNode: ASTableNode) -> Int {
-        return 1
-    }
-
-    open func numberOfSections(in tableNode: ASTableNode) -> Int {
-        return _rx_numberOfSections(in: tableNode)
-    }
-
-    open func _rx_tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-
-    open func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return _rx_tableNode(tableNode, numberOfRowsInSection: section)
-    }
-
-    open func _rx_tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        return (nil as ASCellNode?)!
-    }
-
-    open func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        return _rx_tableNode(tableNode, nodeForRowAt: indexPath)
-    }
-
-    @nonobjc open func _rx_tableNode(_ tableNode: ASTableNode, titleForHeaderInSection section: Int) -> String? {
-        return nil
-    }
-
-    @nonobjc open func tableNode(_ tableNode: ASTableNode, titleForHeaderInSection section: Int) -> String? {
-        return _rx_tableNode(tableNode, titleForHeaderInSection: section)
-    }
-
-    @nonobjc open func _rx_tableNode(_ tableNode: ASTableNode, titleForFooterInSection section: Int) -> String? {
-        return nil
-    }
-
-    @nonobjc open func tableNode(_ tableNode: ASTableNode, titleForFooterInSection section: Int) -> String? {
-        return _rx_tableNode(tableNode, titleForFooterInSection: section)
-    }
-
-    open func _rx_tableNode(_ tableNode: ASTableNode, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    @nonobjc open func tableNode(_ tableNode: ASTableNode, canEditRowAt indexPath: IndexPath) -> Bool {
-        return _rx_tableNode(tableNode, canEditRowAt: indexPath)
-    }
-
-    open func _rx_tableNode(_ tableNode: ASTableNode, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    @nonobjc open func tableNode(_ tableNode: ASTableNode, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return _rx_tableNode(tableNode, canMoveRowAt: indexPath)
-    }
-
-}
-
-open class ASTableSectionedDataSource<S: SectionModelType>: _ASTableSectionedDataSource, SectionedViewDataSourceType {
-
+open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDataSource, ASCommonTableDataSource, SectionedViewDataSourceType {
+    
     public typealias I = S.Item
     public typealias Section = S
-    public typealias CellFactory = (ASTableSectionedDataSource<S>, ASTableNode, IndexPath, I) -> ASCellNode
+    
+    public typealias ConfigureNode = (ASTableSectionedDataSource<S>, ASTableNode, IndexPath, I) -> ASCellNode
+    public typealias TitleForHeaderInSection = (ASTableSectionedDataSource<S>, Int) -> String?
+    public typealias TitleForFooterInSection = (ASTableSectionedDataSource<S>, Int) -> String?
+    public typealias CanEditRowAtIndexPath = (ASTableSectionedDataSource<S>, IndexPath) -> Bool
+    public typealias CanMoveRowAtIndexPath = (ASTableSectionedDataSource<S>, IndexPath) -> Bool
 
+    #if os(iOS)
+    public typealias SectionIndexTitles = (ASTableSectionedDataSource<S>) -> [String]?
+    public typealias SectionForSectionIndexTitle = (ASTableSectionedDataSource<S>, _ title: String, _ index: Int) -> Int
+    #endif
+    
+    #if os(iOS)
+    public init(
+        configureNode: @escaping ConfigureNode,
+        titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
+        titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
+        canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
+        canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false },
+        sectionIndexTitles: @escaping SectionIndexTitles = { _ in nil },
+        sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index }
+        ) {
+        self.configureNode = configureNode
+        self.titleForHeaderInSection = titleForHeaderInSection
+        self.titleForFooterInSection = titleForFooterInSection
+        self.canEditRowAtIndexPath = canEditRowAtIndexPath
+        self.canMoveRowAtIndexPath = canMoveRowAtIndexPath
+        self.sectionIndexTitles = sectionIndexTitles
+        self.sectionForSectionIndexTitle = sectionForSectionIndexTitle
+    }
+    #else
+    public init(
+        configureNode: @escaping ConfigureNode,
+        titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
+        titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
+        canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
+        canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false }
+        ) {
+        self.configureCell = configureCell
+        self.titleForHeaderInSection = titleForHeaderInSection
+        self.titleForFooterInSection = titleForFooterInSection
+        self.canEditRowAtIndexPath = canEditRowAtIndexPath
+        self.canMoveRowAtIndexPath = canMoveRowAtIndexPath
+    }
+    #endif
+    
     #if DEBUG
     // If data source has already been bound, then mutating it
     // afterwards isn't something desired.
@@ -98,18 +82,18 @@ open class ASTableSectionedDataSource<S: SectionModelType>: _ASTableSectionedDat
     // If particular item is mutable, that is irrelevant for this logic to function
     // properly.
     public typealias SectionModelSnapshot = SectionModel<S, I>
-
+    
     private var _sectionModels: [SectionModelSnapshot] = []
-
+    
     open var sectionModels: [S] {
         return _sectionModels.map { Section(original: $0.model, items: $0.items) }
     }
-
+    
     open subscript(section: Int) -> S {
         let sectionModel = self._sectionModels[section]
         return S(original: sectionModel.model, items: sectionModel.items)
     }
-
+    
     open subscript(indexPath: IndexPath) -> I {
         get {
             return self._sectionModels[indexPath.section].items[indexPath.item]
@@ -120,16 +104,16 @@ open class ASTableSectionedDataSource<S: SectionModelType>: _ASTableSectionedDat
             self._sectionModels[indexPath.section] = section
         }
     }
-
+    
     open func model(at indexPath: IndexPath) throws -> Any {
         return self[indexPath]
     }
-
+    
     open func setSections(_ sections: [S]) {
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
 
-    open var configureCell: CellFactory! = nil {
+    open var configureNode: ConfigureNode {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -137,29 +121,14 @@ open class ASTableSectionedDataSource<S: SectionModelType>: _ASTableSectionedDat
         }
     }
 
-    open var titleForHeaderInSection: ((ASTableSectionedDataSource<S>, Int) -> String?)? {
+    open var titleForHeaderInSection: TitleForHeaderInSection {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
             #endif
         }
     }
-    open var titleForFooterInSection: ((ASTableSectionedDataSource<S>, Int) -> String?)? {
-        didSet {
-            #if DEBUG
-                ensureNotMutatedAfterBinding()
-            #endif
-        }
-    }
-
-    open var canEditRowAtIndexPath: ((ASTableSectionedDataSource<S>, IndexPath) -> Bool)? {
-        didSet {
-            #if DEBUG
-                ensureNotMutatedAfterBinding()
-            #endif
-        }
-    }
-    open var canMoveRowAtIndexPath: ((ASTableSectionedDataSource<S>, IndexPath) -> Bool)? {
+    open var titleForFooterInSection: TitleForFooterInSection {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -167,61 +136,82 @@ open class ASTableSectionedDataSource<S: SectionModelType>: _ASTableSectionedDat
         }
     }
 
-    open var rowAnimation: UITableViewRowAnimation = .automatic
-
-    public override init() {
-        super.init()
-        self.configureCell = { [weak self] _ in
-            if let strongSelf = self {
-                precondition(false, "There is a minor problem. `cellFactory` property on \(strongSelf) was not set. Please set it manually, or use one of the `rx_bindTo` methods.")
-            }
-
-            return (nil as ASCellNode!)!
+    open var canEditRowAtIndexPath: CanEditRowAtIndexPath {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
         }
     }
+    open var canMoveRowAtIndexPath: CanMoveRowAtIndexPath {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    
+    #if os(iOS)
+    open var sectionIndexTitles: SectionIndexTitles {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    open var sectionForSectionIndexTitle: SectionForSectionIndexTitle {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    #endif
 
-    // ASTableDataSource
+    // MARK:- ASTableDataSource
 
-    open override func _rx_numberOfSections(in tableNode: ASTableNode) -> Int {
+    open func numberOfSections(in tableNode: ASTableNode) -> Int {
         return _sectionModels.count
     }
-
-    open override func _rx_tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
+    
+    open func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
         guard _sectionModels.count > section else { return 0 }
         return _sectionModels[section].items.count
     }
-
-    open override func _rx_tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
+    
+    open func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
-
-        return configureCell(self, tableNode, indexPath, self[indexPath])
+        
+        return configureNode(self, tableNode, indexPath, self[indexPath])
+    }
+    
+    open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return titleForHeaderInSection(self, section)
+    }
+    
+    open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return titleForFooterInSection(self, section)
+    }
+    
+    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return canEditRowAtIndexPath(self, indexPath)
+    }
+    
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return canMoveRowAtIndexPath(self, indexPath)
     }
 
-    open override func _rx_tableNode(_ tableNode: ASTableNode, titleForHeaderInSection section: Int) -> String? {
-        return titleForHeaderInSection?(self, section)
+    #if os(iOS)
+    open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return sectionIndexTitles(self)
     }
-
-    open override func _rx_tableNode(_ tableNode: ASTableNode, titleForFooterInSection section: Int) -> String? {
-        return titleForFooterInSection?(self, section)
+    
+    open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return sectionForSectionIndexTitle(self, title, index)
     }
+    #endif
 
-    open override func _rx_tableNode(_ tableNode: ASTableNode, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let canEditRow = canEditRowAtIndexPath?(self, indexPath) else {
-            return super._rx_tableNode(tableNode, canEditRowAt: indexPath)
-        }
-
-        return canEditRow
-    }
-
-    open override func _rx_tableNode(_ tableNode: ASTableNode, canMoveRowAt indexPath: IndexPath) -> Bool {
-        guard let canMoveRow = canMoveRowAtIndexPath?(self, indexPath) else {
-            return super._rx_tableNode(tableNode, canMoveRowAt: indexPath)
-        }
-
-        return canMoveRow
-    }
-
-//    open override func _rx_tableNode(_ tableNode: ASTableNode, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//    open override func tableNode(_ tableNode: ASTableNode, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 //        self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
 //    }
 

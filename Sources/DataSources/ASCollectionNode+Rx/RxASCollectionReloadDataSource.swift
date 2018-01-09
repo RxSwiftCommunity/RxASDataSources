@@ -22,7 +22,7 @@ open class RxASCollectionReloadDataSource<S: SectionModelType>: ASCollectionSect
     }
 
     open func collectionNode(_ collectionNode: ASCollectionNode, observedEvent: RxSwift.Event<Element>) -> Void {
-        UIBindingObserver(UIElement: self) { dataSource, element in
+        Binder(self) { dataSource, element in
             #if DEBUG
                 self._dataSourceBound = true
             #endif

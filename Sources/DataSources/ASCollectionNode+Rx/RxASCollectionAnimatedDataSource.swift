@@ -25,7 +25,7 @@ open class RxASCollectionAnimatedDataSource<S: AnimatableSectionModelType>: ASCo
     }
 
     open func collectionNode(_ collectionNode: ASCollectionNode, observedEvent: RxSwift.Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, newSections in
+        Binder(self) { dataSource, newSections in
             #if DEBUG
                 self._dataSourceBound = true
             #endif

@@ -20,12 +20,8 @@ import AsyncDisplayKit
 open class RxASTableReloadDataSource<S: SectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
     public typealias Element = [S]
 
-    public override init() {
-        super.init()
-    }
-
     open func tableNode(_ tableNode: ASTableNode, observedEvent: RxSwift.Event<Element>) -> Void {
-        UIBindingObserver(UIElement: self) { dataSource, element in
+        Binder(self) { dataSource, element in
             #if DEBUG
                 self._dataSourceBound = true
             #endif

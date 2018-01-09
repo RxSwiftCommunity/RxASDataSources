@@ -151,18 +151,18 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: _ASCollectionSe
     }
 
     public override init() {
-        self.configureCell = {_, _, _, _ in return (nil as ASCellNode?)! }
-        self.supplementaryViewFactory = {_, _, _, _ in (nil as ASCellNode?)! }
+        self.configureCell = { _,_,_,_ in return (nil as ASCellNode?)! }
+        self.supplementaryViewFactory = { _,_,_,_ in (nil as ASCellNode?)! }
 
         super.init()
 
-        self.configureCell = { [weak self] _ in
+        self.configureCell = { [weak self] (_,_,_,_) in
             precondition(false, "There is a minor problem. `cellFactory` property on \(self!) was not set. Please set it manually, or use one of the `rx_bindTo` methods.")
 
             return (nil as ASCellNode!)!
         }
 
-        self.supplementaryViewFactory = { [weak self] _ in
+        self.supplementaryViewFactory = { [weak self] (_,_,_,_) in
             precondition(false, "There is a minor problem. `supplementaryViewFactory` property on \(self!) was not set.")
             return (nil as ASCellNode?)!
         }

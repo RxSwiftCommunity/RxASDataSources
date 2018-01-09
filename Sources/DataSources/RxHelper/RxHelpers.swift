@@ -19,7 +19,6 @@ func bindingErrorToInterface(_ error: Swift.Error) {
     #endif
 }
 
-
 // MARK: Cast or Fatal error
 
 /// Swift does not implement abstract methods. This method is used as a runtime check to ensure that methods which intended to be abstract (i.e., they should be implemented in subclasses) are not called directly on the superclass.
@@ -32,28 +31,7 @@ func rxFatalError(_ lastMessage: @autoclosure () -> String, file: StaticString =
     fatalError(lastMessage(), file: file, line: line)
 }
 
-// workaround for Swift compiler bug, cheers compiler team :)
-func castOptionalOrFatalError<T>(_ value: Any?) -> T? {
-    if value == nil {
-        return nil
-    }
-    let v: T = castOrFatalError(value)
-    return v
-}
-
 func castOrThrow<T>(_ resultType: T.Type, _ object: Any) throws -> T {
-    guard let returnValue = object as? T else {
-        throw RxCocoaError.castingError(object: object, targetType: resultType)
-    }
-
-    return returnValue
-}
-
-func castOptionalOrThrow<T>(_ resultType: T.Type, _ object: AnyObject) throws -> T? {
-    if NSNull().isEqual(object) {
-        return nil
-    }
-
     guard let returnValue = object as? T else {
         throw RxCocoaError.castingError(object: object, targetType: resultType)
     }
@@ -88,12 +66,3 @@ func rxDebugFatalError(_ message: String) {
         print(message)
     #endif
 }
-
-#if !RX_NO_MODULE
-
-    func rxFatalError(_ lastMessage: String) -> Never  {
-        // The temptation to comment this line is great, but please don't, it's for your own good. The choice is yours.
-        fatalError(lastMessage)
-    }
-    
-#endif

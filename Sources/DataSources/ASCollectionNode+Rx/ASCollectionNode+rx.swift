@@ -10,27 +10,6 @@ import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 
-public extension ASCollectionNode {
-
-    /**
-     Factory method that enables subclasses to implement their own `delegate`.
-
-     - returns: Instance of delegate proxy that wraps `delegate`.
-     */
-    public func createRxDelegateProxy() -> RxASCollectionDelegateProxy {
-        return RxASCollectionDelegateProxy(parentObject: self)
-    }
-
-    /**
-     Factory method that enables subclasses to implement their own `rx.dataSource`.
-
-     - returns: Instance of delegate proxy that wraps `dataSource`.
-     */
-    public func createRxDataSourceProxy() -> RxASCollectionDataSourceProxy {
-        return RxASCollectionDataSourceProxy(parentObject: self)
-    }
-}
-
 public extension Reactive where Base: ASCollectionNode {
     func items<DataSource: RxASCollectionDataSourceType & ASCollectionDataSource, O: ObservableType>(dataSource: DataSource)
         -> (_ source: O)
@@ -56,8 +35,8 @@ public extension Reactive where Base: ASCollectionNode {
 
      For more information take a look at `DelegateProxyType` protocol documentation.
      */
-    public var dataSource: RxASCollectionDataSourceProxy {
-        return RxASCollectionDataSourceProxy.proxyForObject(base)
+    public var dataSource: DelegateProxy<ASCollectionNode, ASCollectionDataSource> {
+        return RxASCollectionDataSourceProxy.proxy(for: base)
     }
 
     /**
