@@ -12,6 +12,7 @@
 	url = https://github.com/pinterest/PINCache.git
 [submodule "Carthage/Checkouts/RxSwift"]
 	url = https://github.com/ReactiveX/RxSwift.git
+	path = Carthage/Checkouts/RxSwift
 [submodule "Carthage/Checkouts/texture"]
 	path = Carthage/Checkouts/texture
 	url = https://github.com/texturegroup/texture.git

@@ -45,7 +45,7 @@ extension ASCollectionNode: SectionedNodeType {
         self.reloadSections(indexSet(sections))
     }
 
-    public func performBatchUpdates<S: SectionModelType>(_ changes: Changeset<S>, animated: Bool, animationConfiguration: RowAnimation) {
+    public func performBatchUpdates<S>(_ changes: Changeset<S>, animated: Bool, animationConfiguration: RowAnimation) {
         self.performBatch(animated: animated, updates: {
             _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
         }, completion: nil)

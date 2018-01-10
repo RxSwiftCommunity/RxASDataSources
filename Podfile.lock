@@ -1,5 +1,5 @@
 PODS:
-  - Differentiator (2.0.2)
+  - Differentiator (3.0.2)
   - PINCache (3.0.1-beta.5):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.5)
     - PINCache/Core (= 3.0.1-beta.5)
@@ -8,21 +8,21 @@ PODS:
   - PINCache/Core (3.0.1-beta.5):
     - PINOperation (= 1.0.3)
   - PINOperation (1.0.3)
-  - PINRemoteImage/Core (3.0.0-beta.11):
+  - PINRemoteImage/Core (3.0.0-beta.12):
     - PINOperation
-  - PINRemoteImage/iOS (3.0.0-beta.11):
+  - PINRemoteImage/iOS (3.0.0-beta.12):
     - PINRemoteImage/Core
-  - PINRemoteImage/PINCache (3.0.0-beta.11):
+  - PINRemoteImage/PINCache (3.0.0-beta.12):
     - PINCache (= 3.0.1-beta.5)
     - PINRemoteImage/Core
-  - RxCocoa (3.6.1):
-    - RxSwift (~> 3.6)
-  - RxSwift (3.6.1)
-  - Texture (2.4):
-    - Texture/PINRemoteImage (= 2.4)
-  - Texture/Core (2.4)
-  - Texture/PINRemoteImage (2.4):
-    - PINRemoteImage/iOS (= 3.0.0-beta.11)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
+  - Texture (2.5.1):
+    - Texture/PINRemoteImage (= 2.5.1)
+  - Texture/Core (2.5.1)
+  - Texture/PINRemoteImage (2.5.1):
+    - PINRemoteImage/iOS (= 3.0.0-beta.12)
     - PINRemoteImage/PINCache
     - Texture/Core
 
@@ -33,14 +33,14 @@ DEPENDENCIES:
   - Texture
 
 SPEC CHECKSUMS:
-  Differentiator: caa9b3957981a2ac8e6b2eac8a676af461caa604
+  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   PINCache: 98e7b1ef782824ad231ade51987c218b758c30d8
   PINOperation: ac23db44796d4a564ecf9b5ea7163510f579b71d
-  PINRemoteImage: d71988f11914a050d6d4cf51efc4ad1de8c0a9d8
-  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
-  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
-  Texture: a5526314780eab35f642d956627f09316b9514e8
+  PINRemoteImage: 0cefe720c2612960bd360710efbd6c73a1991d5f
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  Texture: c3f06e344aa091667b7a56002e525cde674d021a
 
 PODFILE CHECKSUM: df58f9cead49c76984203f4eab4ded96071c8990
 
-COCOAPODS: 1.3.0
+COCOAPODS: 1.3.1

@@ -46,9 +46,9 @@ public protocol SectionedNodeType {
     func performBatchUpdates<S>(_ changes: Changeset<S>, animated: Bool, animationConfiguration: RowAnimation)
 }
 
-func _performBatchUpdates<V: SectionedNodeType, S: SectionModelType>(_ view: V, changes: Changeset<S>, animationConfiguration: RowAnimation) {
+func _performBatchUpdates<V: SectionedNodeType, S>(_ view: V, changes: Changeset<S>, animationConfiguration: RowAnimation) {
     typealias I = S.Item
-
+    
     view.deleteSections(changes.deletedSections, animationStyle: animationConfiguration.deleteAnimation)
     // Updated sections doesn't mean reload entire section, somebody needs to update the section view manually
     // otherwise all cells will be reloaded for nothing.
@@ -57,7 +57,7 @@ func _performBatchUpdates<V: SectionedNodeType, S: SectionModelType>(_ view: V, 
     for (from, to) in changes.movedSections {
         view.moveSection(from, to: to)
     }
-
+    
     view.deleteItemsAtIndexPaths(
         changes.deletedItems.map { IndexPath(item: $0.itemIndex, section: $0.sectionIndex) },
         animationStyle: animationConfiguration.deleteAnimation
@@ -70,7 +70,7 @@ func _performBatchUpdates<V: SectionedNodeType, S: SectionModelType>(_ view: V, 
         changes.updatedItems.map { IndexPath(item: $0.itemIndex, section: $0.sectionIndex) },
         animationStyle: animationConfiguration.reloadAnimation
     )
-
+    
     for (from, to) in changes.movedItems {
         view.moveItemAtIndexPath(
             IndexPath(item: from.itemIndex, section: from.sectionIndex),

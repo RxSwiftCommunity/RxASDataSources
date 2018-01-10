@@ -13,61 +13,26 @@ import AsyncDisplayKit
     import Differentiator
 #endif
 
-open class _ASCollectionSectionedDataSource: NSObject, ASCollectionDataSource {
-
-    @nonobjc open func _rx_numberOfSections(in collectionNode: ASCollectionNode) -> Int {
-        return 0
-    }
-
-    open func numberOfSections(in collectionNode: ASCollectionNode) -> Int {
-        return _rx_numberOfSections(in: collectionNode)
-    }
-
-    @nonobjc open func _rx_collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
-        return 0
-    }
-
-    open func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
-        return _rx_collectionNode(collectionNode, numberOfItemsInSection: section)
-    }
-
-    open func _rx_collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
-        return (nil as ASCellNode?)!
-    }
-
-    open func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
-        return _rx_collectionNode(collectionNode, nodeForItemAt: indexPath)
-    }
-
-    @nonobjc open func _rx_collectionNode(_ collectionNode: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, atIndexPath indexPath: IndexPath) -> ASCellNode {
-        return (nil as ASCellNode?)!
-    }
-
-    open func collectionNode(_ collectionNode: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> ASCellNode {
-        return _rx_collectionNode(collectionNode, nodeForSupplementaryElementOfKind: kind, atIndexPath: indexPath)
-    }
-
-    open func _rx_collectionNode(_ collectionNode: ASCollectionNode, canMoveItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    public func collectionNode(_ collectionNode: ASCollectionNode, canMoveItemAt indexPath: IndexPath) -> Bool {
-        return _rx_collectionNode(collectionNode, canMoveItemAt: indexPath)
-    }
-
-    open func _rx_collectionNode(_ collectionNode: ASCollectionNode, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
-    }
-    public func collectionNode(_ collectionNode: ASCollectionNode, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        _rx_collectionNode(collectionNode, moveItemAt: sourceIndexPath, to: destinationIndexPath)
-    }
-}
-
-open class ASCollectionSectionedDataSource<S: SectionModelType>: _ASCollectionSectionedDataSource, SectionedViewDataSourceType {
+open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCollectionDataSource, ASCommonCollectionDataSource, SectionedViewDataSourceType {
     public typealias I = S.Item
     public typealias Section = S
-    public typealias CellFactory = (ASCollectionSectionedDataSource<S>, ASCollectionNode, IndexPath, I) -> ASCellNode
-    public typealias SupplementaryViewFactory = (ASCollectionSectionedDataSource<S>, ASCollectionNode, String, IndexPath) -> ASCellNode
+    
+    public typealias ConfigureCell = (ASCollectionSectionedDataSource<S>, ASCollectionNode, IndexPath, I) -> ASCellNode
+    public typealias ConfigureSupplementaryView = (ASCollectionSectionedDataSource<S>, ASCollectionNode, String, IndexPath) -> ASCellNode
+    public typealias MoveItem = (ASCollectionSectionedDataSource<S>, _ sourceIndexPath: IndexPath, _ destinationIndexPath:IndexPath) -> Void
+    public typealias CanMoveItemAtIndexPath = (ASCollectionSectionedDataSource<S>, IndexPath) -> Bool
+
+    public init(
+        configureCell: @escaping ConfigureCell,
+        configureSupplementaryView: ConfigureSupplementaryView? = nil,
+        moveItem: @escaping MoveItem = { _, _, _ in () },
+        canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
+        ) {
+        self.configureCell = configureCell
+        self.configureSupplementaryView = configureSupplementaryView
+        self.moveItem = moveItem
+        self.canMoveItemAtIndexPath = canMoveItemAtIndexPath
+    }
 
     #if DEBUG
     // If data source has already been bound, then mutating it
@@ -119,7 +84,7 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: _ASCollectionSe
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
 
-    open var configureCell: CellFactory! = nil {
+    open var configureCell: ConfigureCell {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -127,7 +92,7 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: _ASCollectionSe
         }
     }
 
-    open var supplementaryViewFactory: SupplementaryViewFactory {
+    open var configureSupplementaryView: ConfigureSupplementaryView? {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -135,14 +100,14 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: _ASCollectionSe
         }
     }
 
-    open var moveItem: ((ASCollectionSectionedDataSource<S>, _ sourceIndexPath:IndexPath, _ destinationIndexPath:IndexPath) -> Void)? {
+    open var moveItem: MoveItem {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
             #endif
         }
     }
-    open var canMoveItemAtIndexPath: ((ASCollectionSectionedDataSource<S>, IndexPath) -> Bool)? {
+    open var canMoveItemAtIndexPath: CanMoveItemAtIndexPath {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -150,54 +115,35 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: _ASCollectionSe
         }
     }
 
-    public override init() {
-        self.configureCell = {_, _, _, _ in return (nil as ASCellNode?)! }
-        self.supplementaryViewFactory = {_, _, _, _ in (nil as ASCellNode?)! }
+    //MARK:- ASCollectionNodeDataSource
 
-        super.init()
-
-        self.configureCell = { [weak self] _ in
-            precondition(false, "There is a minor problem. `cellFactory` property on \(self!) was not set. Please set it manually, or use one of the `rx_bindTo` methods.")
-
-            return (nil as ASCellNode!)!
-        }
-
-        self.supplementaryViewFactory = { [weak self] _ in
-            precondition(false, "There is a minor problem. `supplementaryViewFactory` property on \(self!) was not set.")
-            return (nil as ASCellNode?)!
-        }
-    }
-
-    // ASCollectionNodeDataSource
-
-    open override func _rx_numberOfSections(in collectionNode: ASCollectionNode) -> Int {
+    open func numberOfSections(in collectionNode: ASCollectionNode) -> Int {
         return _sectionModels.count
     }
 
-    open override func _rx_collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
+    open func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
         return _sectionModels[section].items.count
     }
 
-    open override func _rx_collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
+    open func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
 
         return configureCell(self, collectionNode, indexPath, self[indexPath])
     }
 
-    open override func _rx_collectionNode(_ collectionNode: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, atIndexPath indexPath: IndexPath) -> ASCellNode {
-        return supplementaryViewFactory(self, collectionNode, kind, indexPath)
-    }
-
-    open override func _rx_collectionNode(_ collectionNode: ASCollectionNode, canMoveItemAt indexPath: IndexPath) -> Bool {
-        guard let canMoveItem = canMoveItemAtIndexPath?(self, indexPath) else {
-            return super._rx_collectionNode(collectionNode, canMoveItemAt: indexPath)
+    open func collectionNode(_ collectionNode: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> ASCellNode {
+        guard let cell = configureSupplementaryView?(self, collectionNode, kind, indexPath) else {
+            fatalError("configureSupplementaryView was not set")
         }
-
-        return canMoveItem
+        return cell
     }
 
-    open override func _rx_collectionNode(_ collectionNode: ASCollectionNode, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    open func collectionNode(_ collectionNode: ASCollectionNode, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return canMoveItemAtIndexPath(self, indexPath)
+    }
+    
+    open func collectionNode(_ collectionNode: ASCollectionNode, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
-        self.moveItem?(self, sourceIndexPath, destinationIndexPath)
+        self.moveItem(self, sourceIndexPath, destinationIndexPath)
     }
 }

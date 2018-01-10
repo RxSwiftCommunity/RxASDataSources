@@ -11,36 +11,33 @@ import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 
-public class RxASTableDelegateProxy: DelegateProxy, DelegateProxyType, ASTableDelegate {
+extension ASTableNode: HasDelegate {
+    public typealias Delegate = ASTableDelegate
+}
 
+final class RxASTableDelegateProxy: DelegateProxy<ASTableNode, ASTableDelegate>, DelegateProxyType, ASTableDelegate {
+    
     /// Typed parent object.
     public weak private(set) var tableNode: ASTableNode?
-
-    /// Initializes `RxASTableDelegateProxy`
-    ///
-    /// - parameter parentObject: Parent object for delegate proxy.
-    public required init(parentObject: AnyObject) {
-        self.tableNode = castOrFatalError(parentObject)
-        super.init(parentObject: parentObject)
+    
+    /// Init
+    /// - parameter tableView: Parent object for delegate proxy.
+    public init(tableNode: ASTableNode) {
+        self.tableNode = tableNode
+        super.init(parentObject: tableNode, delegateProxy: RxASTableDelegateProxy.self)
     }
-
-    public static func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
-        let tableNode: ASTableNode = castOrFatalError(object)
-        return tableNode.delegate
-    }
-
-    public static func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
-        let tableNode: ASTableNode = castOrFatalError(object)
-        tableNode.delegate = castOptionalOrFatalError(delegate)
+    
+    public static func registerKnownImplementations() {
+        self.register { RxASTableDelegateProxy(tableNode: $0) }
     }
 }
 
 public extension Reactive where Base: ASTableNode {
-
-    var delegate: DelegateProxy {
-        return RxASTableDelegateProxy.proxyForObject(base)
+    
+    var delegate: DelegateProxy<ASTableNode, ASTableDelegate> {
+        return RxASTableDelegateProxy.proxy(for: base)
     }
-
+    
     // Event
     /**
      Reactive wrapper for `delegate` message `tableNode:didSelectRowAtIndexPath:`.
@@ -50,10 +47,10 @@ public extension Reactive where Base: ASTableNode {
             .map { a in
                 return try castOrThrow(IndexPath.self, a[1])
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:didDeselectRowAtIndexPath:`.
      */
@@ -62,10 +59,10 @@ public extension Reactive where Base: ASTableNode {
             .map { a in
                 return try castOrThrow(IndexPath.self, a[1])
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:commitEditingStyle:forRowAtIndexPath:`.
      */
@@ -77,10 +74,10 @@ public extension Reactive where Base: ASTableNode {
             .map { a in
                 return (try castOrThrow(IndexPath.self, a[2]))
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:commitEditingStyle:forRowAtIndexPath:`.
      */
@@ -92,10 +89,10 @@ public extension Reactive where Base: ASTableNode {
             .map { a in
                 return try castOrThrow(IndexPath.self, a[2])
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:moveRowAtIndexPath:toIndexPath:`.
      */
@@ -104,10 +101,10 @@ public extension Reactive where Base: ASTableNode {
             .map { a in
                 return (try castOrThrow(IndexPath.self, a[1]), try castOrThrow(IndexPath.self, a[2]))
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:willDisplayCell:forRowAtIndexPath:`.
      */
@@ -116,10 +113,10 @@ public extension Reactive where Base: ASTableNode {
             .map { a in
                 return try castOrThrow(ASCellNode.self, a[1])
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:didEndDisplayingCell:forRowAtIndexPath:`.
      */
@@ -128,16 +125,16 @@ public extension Reactive where Base: ASTableNode {
             .map { a in
                 return try castOrThrow(ASCellNode.self, a[1])
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:didSelectRowAtIndexPath:`.
-
+     
      It can be only used when one of the `rx.itemsWith*` methods is used to bind observable sequence,
      or any other data source conforming to `SectionedViewDataSourceType` protocol.
-
+     
      ```
      tableNode.rx.modelSelected(MyModel.self)
      .map { ...
@@ -148,19 +145,19 @@ public extension Reactive where Base: ASTableNode {
             guard let view = view else {
                 return Observable.empty()
             }
-
+            
             return Observable.just(try view.rx.model(at: indexPath))
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:didDeselectRowAtIndexPath:`.
-
+     
      It can be only used when one of the `rx.itemsWith*` methods is used to bind observable sequence,
      or any other data source conforming to `SectionedViewDataSourceType` protocol.
-
+     
      ```
      tableNode.rx.modelDeselected(MyModel.self)
      .map { ...
@@ -171,19 +168,19 @@ public extension Reactive where Base: ASTableNode {
             guard let view = view else {
                 return Observable.empty()
             }
-
+            
             return Observable.just(try view.rx.model(at: indexPath))
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Reactive wrapper for `delegate` message `tableNode:commitEditingStyle:forRowAtIndexPath:`.
-
+     
      It can be only used when one of the `rx.itemsWith*` methods is used to bind observable sequence,
      or any other data source conforming to `SectionedViewDataSourceType` protocol.
-
+     
      ```
      tableNode.rx.modelDeleted(MyModel.self)
      .map { ...
@@ -194,13 +191,13 @@ public extension Reactive where Base: ASTableNode {
             guard let view = view else {
                 return Observable.empty()
             }
-
+            
             return Observable.just(try view.rx.model(at: indexPath))
         }
-
+        
         return ControlEvent(events: source)
     }
-
+    
     /**
      Synchronous helper method for retrieving a model at indexPath through a reactive data source.
      */

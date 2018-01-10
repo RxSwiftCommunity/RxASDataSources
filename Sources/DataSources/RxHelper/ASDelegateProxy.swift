@@ -12,10 +12,12 @@ import RxSwift
 import RxCocoa
 
 extension ObservableType {
-    func subscribeProxyDataSource<P: DelegateProxyType>(ofObject object: ASDisplayNode, dataSource: AnyObject, retainDataSource: Bool, binding: @escaping (P, RxSwift.Event<E>) -> Void)
-        -> Disposable {
-            let proxy = P.proxyForObject(object)
-            let unregisterDelegate = P.installForwardDelegate(dataSource, retainDelegate: retainDataSource, onProxyForObject: object)
+    func subscribeProxyDataSource<Proxy: DelegateProxyType>(ofObject object: Proxy.ParentObject, dataSource: Proxy.Delegate, retainDataSource: Bool, binding: @escaping (Proxy, Event<E>) -> Void)
+        -> Disposable
+        where Proxy.ParentObject: ASDisplayNode {
+
+            let proxy = Proxy.proxy(for: object)
+            let unregisterDelegate = Proxy.installForwardDelegate(dataSource, retainDelegate: retainDataSource, onProxyForObject: object)
             // this is needed to flush any delayed old state (https://github.com/RxSwiftCommunity/RxDataSources/pull/75)
             object.layoutIfNeeded()
 
@@ -31,7 +33,7 @@ extension ObservableType {
                 .subscribe { [weak object] (event: RxSwift.Event<E>) in
 
                     if let object = object {
-                        assert(proxy === P.currentDelegateFor(object), "Proxy changed from the time it was first set.\nOriginal: \(proxy)\nExisting: \(String(describing: P.currentDelegateFor(object)))")
+                        assert(proxy === Proxy.currentDelegate(for: object), "Proxy changed from the time it was first set.\nOriginal: \(proxy)\nExisting: \(String(describing: Proxy.currentDelegate(for: object)))")
                     }
 
                     binding(proxy, event)
