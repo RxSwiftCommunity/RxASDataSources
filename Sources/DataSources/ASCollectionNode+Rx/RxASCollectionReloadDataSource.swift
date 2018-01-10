@@ -14,7 +14,7 @@ import AsyncDisplayKit
     import Differentiator
 #endif
 
-open class RxASCollectionReloadDataSource<S: SectionModelType>: ASCollectionSectionedDataSource<S>, RxASCollectionDataSourceType {
+final class RxASCollectionReloadDataSource<S: SectionModelType>: ASCollectionSectionedDataSource<S>, RxASCollectionDataSourceType {
     public typealias Element = [S]
 
     open func collectionNode(_ collectionNode: ASCollectionNode, observedEvent: RxSwift.Event<Element>) -> Void {

@@ -31,7 +31,7 @@ extension ASCollectionNode: HasDataSource {
 }
 
 /// For more information take a look at `DelegateProxyType`.
-public class RxASCollectionDataSourceProxy: DelegateProxy<ASCollectionNode, ASCollectionDataSource>, ASCollectionDataSource, DelegateProxyType {
+final class RxASCollectionDataSourceProxy: DelegateProxy<ASCollectionNode, ASCollectionDataSource>, ASCollectionDataSource, DelegateProxyType {
     
     /// Typed parent object.
     public weak private(set) var collectionNode: ASCollectionNode?
@@ -46,10 +46,6 @@ public class RxASCollectionDataSourceProxy: DelegateProxy<ASCollectionNode, ASCo
         self.register { RxASCollectionDataSourceProxy(collectionNode: $0) }
     }
 
-    public override func setForwardToDelegate(_ forwardToDelegate: ASCollectionDataSource?, retainDelegate: Bool) {
-        super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
-    }
-
     // MARK: DataSource
     private weak var _requiredMethodsDataSource: ASCollectionDataSource? = collectionDataSourceNotSet
 
@@ -61,6 +57,11 @@ public class RxASCollectionDataSourceProxy: DelegateProxy<ASCollectionNode, ASCo
     /// Required data source method implementation.
     public func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
         return (_requiredMethodsDataSource ?? collectionDataSourceNotSet).collectionNode!(collectionNode, nodeForItemAt: indexPath)
+    }
+    
+    public override func setForwardToDelegate(_ forwardToDelegate: ASCollectionDataSource?, retainDelegate: Bool) {
+        _requiredMethodsDataSource = forwardToDelegate ?? collectionDataSourceNotSet
+        super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
     }
     
 }

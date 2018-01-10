@@ -210,9 +210,9 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
         return sectionForSectionIndexTitle(self, title, index)
     }
     #endif
-
-//    open override func tableNode(_ tableNode: ASTableNode, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
-//    }
+    
+    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
+    }
 
 }

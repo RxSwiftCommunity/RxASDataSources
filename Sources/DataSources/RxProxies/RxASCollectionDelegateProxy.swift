@@ -8,7 +8,6 @@
 
 import Foundation
 
-#if os(iOS)
 import AsyncDisplayKit
 #if !RX_NO_MODULE
 import RxSwift
@@ -20,7 +19,7 @@ extension ASCollectionNode: HasDelegate {
 }
 
 /// For more information take a look at `DelegateProxyType`.
-public class RxASCollectionDelegateProxy: DelegateProxy<ASCollectionNode, ASCollectionDelegate>, DelegateProxyType, ASCollectionDelegate, ASCollectionDelegateFlowLayout {
+final class RxASCollectionDelegateProxy: DelegateProxy<ASCollectionNode, ASCollectionDelegate>, DelegateProxyType, ASCollectionDelegate, ASCollectionDelegateFlowLayout {
     
     /// Typed parent object.
     public weak private(set) var collectionNode: ASCollectionNode?
@@ -34,10 +33,7 @@ public class RxASCollectionDelegateProxy: DelegateProxy<ASCollectionNode, ASColl
     public static func registerKnownImplementations() {
         self.register { RxASCollectionDelegateProxy(collectionNode: $0) }
     }
-        
-    public override func setForwardToDelegate(_ forwardToDelegate: ASCollectionDelegate?, retainDelegate: Bool) {
-        super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
-    }
+    
 }
 
 public extension Reactive where Base: ASCollectionNode {
@@ -177,5 +173,3 @@ public extension Reactive where Base: ASCollectionNode {
         return element as! T
     }
 }
-
-#endif

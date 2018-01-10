@@ -6,7 +6,6 @@
 //  Copyright © 2017 Dang Thai Son. All rights reserved.
 //
 
-#if os(iOS)
 import Foundation
 import AsyncDisplayKit
 import RxSwift
@@ -27,13 +26,13 @@ final class ASTableDataSourceNotSet: NSObject, ASTableDataSource {
         rxAbstractMethod(message: "DataSource not set")
     }
 }
-    
+
 extension ASTableNode: HasDataSource {
     public typealias DataSource = ASTableDataSource
 }
 
 /// For more information take a look at `DelegateProxyType`.
-public class RxASTableDataSourceProxy: DelegateProxy<ASTableNode, ASTableDataSource>, DelegateProxyType, ASTableDataSource {
+final class RxASTableDataSourceProxy: DelegateProxy<ASTableNode, ASTableDataSource>, DelegateProxyType, ASTableDataSource {
     
     /// Typed parent object.
     public weak fileprivate(set) var tableNode: ASTableNode?
@@ -49,25 +48,23 @@ public class RxASTableDataSourceProxy: DelegateProxy<ASTableNode, ASTableDataSou
     }
     
     public override func setForwardToDelegate(_ forwardToDelegate: ASTableDataSource?, retainDelegate: Bool) {
-            super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
-        }
-        
-        // MARK: DataSource
-        fileprivate weak var _requiredMethodsDataSource: ASTableDataSource? = dataSourceNotSet
-        
-        /// Required datasource method implementation.
-        public func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-            let dataSource = _requiredMethodsDataSource ?? dataSourceNotSet
-            
-            return dataSource.tableNode!(tableNode, numberOfRowsInSection: section)
-        }
-        
-        /// Required datasource method implementation.
-        public func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-            let dataSource = _requiredMethodsDataSource ?? dataSourceNotSet
-            
-            return dataSource.tableNode!(tableNode, nodeForRowAt: indexPath)
-        }
+        _requiredMethodsDataSource = forwardToDelegate ?? dataSourceNotSet
+        super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
     }
     
-#endif
+    // MARK: DataSource
+    fileprivate weak var _requiredMethodsDataSource: ASTableDataSource? = dataSourceNotSet
+    
+    /// Required datasource method implementation.
+    public func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
+        let dataSource = _requiredMethodsDataSource ?? dataSourceNotSet
+        return dataSource.tableNode!(tableNode, numberOfRowsInSection: section)
+    }
+
+    /// Required datasource method implementation.
+    public func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
+        let dataSource = _requiredMethodsDataSource ?? dataSourceNotSet
+        
+        return dataSource.tableNode!(tableNode, nodeForRowAt: indexPath)
+    }
+}

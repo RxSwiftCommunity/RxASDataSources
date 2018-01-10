@@ -141,7 +141,7 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
     open func collectionNode(_ collectionNode: ASCollectionNode, canMoveItemAt indexPath: IndexPath) -> Bool {
         return canMoveItemAtIndexPath(self, indexPath)
     }
-
+    
     open func collectionNode(_ collectionNode: ASCollectionNode, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
         self.moveItem(self, sourceIndexPath, destinationIndexPath)
