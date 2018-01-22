@@ -49,7 +49,7 @@ $ pod install
 To integrate RxASDataSources into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "dangthaison91/RxASDataSources"
+github "RxSwiftCommunity/RxASDataSources"
 ```
 
 ## Usage
