@@ -75,4 +75,4 @@ For more advance usages, please follow [RxDataSources](https://github.com/RxSwif
 
 ## License
 
-RxASDataSources is released under the MIT license. See [LICENSE](https://github.com/RxSwiftCommunity/RxTextureDataSources/blob/master/LICENSE) for details.
+RxASDataSources is released under the MIT license. See [LICENSE](https://github.com/RxSwiftCommunity/RxASDataSources/blob/master/LICENSE) for details.

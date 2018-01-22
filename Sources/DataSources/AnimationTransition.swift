@@ -3,7 +3,7 @@
 //  RxASDataSources
 //
 //  Created by dangthaison on 1/9/18.
-//  Copyright © 2018 RxSwiftCommunity. All rights reserved.
+//  Copyright (c) 2018 RxSwiftCommunity. All rights reserved.
 //
 
 /// Transition between two view states

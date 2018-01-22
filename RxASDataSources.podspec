@@ -1,13 +1,16 @@
 Pod::Spec.new do |s|
      s.name = 'RxASDataSources'
-     s.version = '0.3'
+     s.version = '0.3.1'
      s.license = { :type => "MIT", :file => "LICENSE" }
-     s.summary = 'RxDataSources for AsyncDisplayKit/Texture ASTableNode/ASCollectionNode'
-     s.homepage = 'https://github.com/dangthaison91/RxASDataSources'
+     s.summary = 'RxDataSources for AsyncDisplayKit/Texture supports ASTableNode/ASCollectionNode'
+     s.homepage = 'https://github.com/RxSwiftCommunity/RxASDataSources'
      s.social_media_url = 'https://twitter.com/dangthaison91'
      s.authors = { "Dang Thai Son" => "dangthaison.91@gmail.com" }
-     s.source = { :git => "https://github.com/dangthaison91/RxASDataSources.git", :tag => s.version.to_s }
-     s.platforms     = { :ios => "8.0" }
+     s.source = { :git => "https://github.com/RxSwiftCommunity/RxASDataSources.git", :tag => s.version.to_s }
+
+     s.ios.deployment_target = '8.0'
+     s.tvos.deployment_target = '9.0'
+     # s.pod_target_xcconfig = { "SWIFT_VERSION" => "4.0" }
      s.requires_arc = true
 
      s.source_files  = "Sources/**/*.swift"
