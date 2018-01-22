@@ -6,17 +6,27 @@
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/RxASDataSources.svg)](https://cocoapods.org/pods/RxASDataSources)
 [![Travis](https://img.shields.io/travis/dangthaison91/RxASDataSources/master.svg)](https://travis-ci.org/dangthaison91/RxASDataSources/branches)
 
-[RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) for AsyncDisplayKit/Texture: ASTableNode & ASCollectionNode.
+[RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) for [AsyncDisplayKit/Texture](http://texturegroup.org/docs/getting-started.html): ASTableNode & ASCollectionNode.
 
+- [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
 
+## Features
+- [x] **O(N)** Diff algorithm from [RxDataSources/Differentiator](https://github.com/RxSwiftCommunity/RxDataSources/tree/master/Sources/Differentiator)
+- [x] Shared RxDataSources's APIs so you must learn only once.
+- [x] Supports `ASTableNode` and `ASCollectionNode`
+- [ ] Support `nodeBlockForRowAtIndexPath`
+- [ ] More complex Example app
+
+
 ## Requirements
 
 - iOS 8.0+
 - Xcode 9.0+
+- RxSwift 4.0 & Texture 2.5
 
 ## Installation
 
@@ -43,6 +53,25 @@ github "dangthaison91/RxASDataSources"
 ```
 
 ## Usage
+Working with RxASDataSources will be very simple if you are familiar with RxDataSources:
+```ruby
+typealias Section = SectionModel<String, Int>
+
+let configureCell: ASTableSectionedDataSource<Section>.ConfigureCell = { (dataSource, tableNode, index, model) in
+     let cell = ASTextCellNode()
+     cell.text = model.info
+     return cell
+ }
+
+ let animation = RowAnimation(insertAnimation: .automatic, reloadAnimation: .fade, deleteAnimation: .automatic)
+ let dataSource = RxASTableSectionedReloadDataSource<Section>(animationConfiguration: animation, configureCell: configureCell)
+
+ items
+    .bind(to: tableNode.rx.items(dataSource: dataSource))
+    .disposed(by: disposeBag)
+```
+
+For more advance usages, please follow [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) and [Example](https://github.com/RxSwiftCommunity/RxDataSources/tree/master/Example) then simply replace your **Views -> Nodes.**
 
 ## License
 
