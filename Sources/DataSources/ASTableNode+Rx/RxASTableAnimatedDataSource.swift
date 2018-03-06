@@ -51,6 +51,31 @@ final class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableS
             sectionForSectionIndexTitle: sectionForSectionIndexTitle
         )
     }
+
+    public init(
+        animationConfiguration: RowAnimation = RowAnimation(),
+        animationType: @escaping AnimationType = { _, _, _ in .animated },
+        configureCellBlock: @escaping ConfigureCellBlock,
+        titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
+        titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
+        canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
+        canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false },
+        sectionIndexTitles: @escaping SectionIndexTitles = { _ in nil },
+        sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index }
+        ) {
+        self.animationConfiguration = animationConfiguration
+        self.animationType = animationType
+
+        super.init(
+            configureCellBlock: configureCellBlock,
+            titleForHeaderInSection: titleForHeaderInSection,
+            titleForFooterInSection: titleForFooterInSection,
+            canEditRowAtIndexPath: canEditRowAtIndexPath,
+            canMoveRowAtIndexPath: canMoveRowAtIndexPath,
+            sectionIndexTitles: sectionIndexTitles,
+            sectionForSectionIndexTitle: sectionForSectionIndexTitle
+        )
+    }
     #else
     public init(
         animationConfiguration: AnimationConfiguration = RowAnimation(),
@@ -66,6 +91,27 @@ final class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableS
     
     super.init(
         configureCell: configureCell,
+        titleForHeaderInSection: titleForHeaderInSection,
+        titleForFooterInSection: titleForFooterInSection,
+        canEditRowAtIndexPath: canEditRowAtIndexPath,
+        canMoveRowAtIndexPath: canMoveRowAtIndexPath
+    )
+    }
+
+    public init(
+        animationConfiguration: AnimationConfiguration = RowAnimation(),
+        animationType: @escaping AnimationType = { _, _, _ in .animated },
+        configureCellBlock: @escaping ConfigureCellBlock,
+        titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
+        titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
+        canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
+        canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false }
+    ) {
+    self.animationConfiguration = animationConfiguration
+    self.animationType = animationType
+
+    super.init(
+        configureCellBlock: configureCellBlock,
         titleForHeaderInSection: titleForHeaderInSection,
         titleForFooterInSection: titleForFooterInSection,
         canEditRowAtIndexPath: canEditRowAtIndexPath,

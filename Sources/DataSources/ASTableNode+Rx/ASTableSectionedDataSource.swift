@@ -19,6 +19,7 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     public typealias Section = S
     
     public typealias ConfigureCell = (ASTableSectionedDataSource<S>, ASTableNode, IndexPath, I) -> ASCellNode
+    public typealias ConfigureCellBlock = (ASTableSectionedDataSource<S>, ASTableNode, IndexPath, I) -> ASCellNodeBlock
     public typealias TitleForHeaderInSection = (ASTableSectionedDataSource<S>, Int) -> String?
     public typealias TitleForFooterInSection = (ASTableSectionedDataSource<S>, Int) -> String?
     public typealias CanEditRowAtIndexPath = (ASTableSectionedDataSource<S>, IndexPath) -> Bool
@@ -29,6 +30,14 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     public typealias SectionForSectionIndexTitle = (ASTableSectionedDataSource<S>, _ title: String, _ index: Int) -> Int
     #endif
     
+    fileprivate static func configureCellNotSet(dataSource: ASTableSectionedDataSource<S>, node: ASTableNode, indexPath: IndexPath, model: I) -> ASCellNode {
+        return ASTableDataSourceNotSet().tableNode(node, nodeForRowAt: indexPath)
+    }
+
+    fileprivate static func configureCellBlockNotSet(dataSource: ASTableSectionedDataSource<S>, node: ASTableNode, indexPath: IndexPath, model: I) -> ASCellNodeBlock {
+        return { dataSource.tableNode(node, nodeForRowAt: indexPath) }
+    }
+
     #if os(iOS)
     public init(
         configureCell: @escaping ConfigureCell,
@@ -40,6 +49,26 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
         sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index }
         ) {
         self.configureCell = configureCell
+        self.configureCellBlock = ASTableSectionedDataSource.configureCellBlockNotSet
+        self.titleForHeaderInSection = titleForHeaderInSection
+        self.titleForFooterInSection = titleForFooterInSection
+        self.canEditRowAtIndexPath = canEditRowAtIndexPath
+        self.canMoveRowAtIndexPath = canMoveRowAtIndexPath
+        self.sectionIndexTitles = sectionIndexTitles
+        self.sectionForSectionIndexTitle = sectionForSectionIndexTitle
+    }
+
+    public init(
+        configureCellBlock: @escaping ConfigureCellBlock,
+        titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
+        titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
+        canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
+        canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false },
+        sectionIndexTitles: @escaping SectionIndexTitles = { _ in nil },
+        sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index }
+        ) {
+        self.configureCell = ASTableSectionedDataSource.configureCellNotSet
+        self.configureCellBlock = configureCellBlock
         self.titleForHeaderInSection = titleForHeaderInSection
         self.titleForFooterInSection = titleForFooterInSection
         self.canEditRowAtIndexPath = canEditRowAtIndexPath
@@ -56,6 +85,22 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
         canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false }
         ) {
         self.configureCell = configureCell
+        self.configureCellBlock = ASTableSectionedDataSource.configureCellBlockNotSet
+        self.titleForHeaderInSection = titleForHeaderInSection
+        self.titleForFooterInSection = titleForFooterInSection
+        self.canEditRowAtIndexPath = canEditRowAtIndexPath
+        self.canMoveRowAtIndexPath = canMoveRowAtIndexPath
+    }
+
+    public init(
+        configureCellBlock: @escaping ConfigureCellBlock,
+        titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
+        titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
+        canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
+        canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false }
+        ) {
+        self.configureCell = ASTableSectionedDataSource.configureCell
+        self.configureCellBlock = configureCellBlock
         self.titleForHeaderInSection = titleForHeaderInSection
         self.titleForFooterInSection = titleForFooterInSection
         self.canEditRowAtIndexPath = canEditRowAtIndexPath
@@ -114,6 +159,14 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     }
 
     open var configureCell: ConfigureCell {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+
+    open var configureCellBlock: ConfigureCellBlock {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -181,8 +234,14 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     
     open func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
-        
+
         return configureCell(self, tableNode, indexPath, self[indexPath])
+    }
+
+    open func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
+        precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
+
+        return configureCellBlock(self, tableNode, indexPath, self[indexPath])
     }
     
     open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

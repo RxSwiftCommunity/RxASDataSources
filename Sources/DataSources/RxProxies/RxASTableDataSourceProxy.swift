@@ -25,6 +25,10 @@ final class ASTableDataSourceNotSet: NSObject, ASTableDataSource {
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         rxAbstractMethod(message: "DataSource not set")
     }
+
+    func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
+        rxAbstractMethod(message: "DataSource not set")
+    }
 }
 
 extension ASTableNode: HasDataSource {
@@ -66,5 +70,12 @@ final class RxASTableDataSourceProxy: DelegateProxy<ASTableNode, ASTableDataSour
         let dataSource = _requiredMethodsDataSource ?? dataSourceNotSet
         
         return dataSource.tableNode!(tableNode, nodeForRowAt: indexPath)
+    }
+
+    /// Required datasource method implementation.
+    public func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
+        let datasource = _requiredMethodsDataSource ?? dataSourceNotSet
+
+        return datasource.tableNode!(tableNode, nodeBlockForRowAt: indexPath)
     }
 }
