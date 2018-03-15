@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import Differentiator
 
-final class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
+open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
 
     public typealias Element = [S]
     public typealias AnimationType = (ASTableSectionedDataSource<S>, ASTableNode, [Changeset<S>]) -> AnimationTransition
