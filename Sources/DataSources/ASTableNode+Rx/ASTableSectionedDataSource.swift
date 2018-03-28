@@ -35,7 +35,8 @@ open class ASTableSectionedDataSource<S: SectionModelType>: NSObject, ASTableDat
     }
 
     fileprivate static func configureCellBlockNotSet(dataSource: ASTableSectionedDataSource<S>, node: ASTableNode, indexPath: IndexPath, model: I) -> ASCellNodeBlock {
-        return { dataSource.tableNode(node, nodeForRowAt: indexPath) }
+        // Users expect taleNode(_:nodeForRowAt:) will be executed in main thread according to api doc http://texturegroup.org/appledoc/Protocols/ASTableDataSource.html#//api/name/tableNode:nodeForRowAtIndexPath: .
+        return { DispatchQueue.main.sync(execute: { dataSource.tableNode(node, nodeForRowAt: indexPath) }) }
     }
 
     #if os(iOS)
