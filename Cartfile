@@ -1,3 +1,2 @@
-
-github "RxSwiftCommunity/RxDataSources"
-github "texturegroup/texture"
+github "RxSwiftCommunity/RxDataSources" == 3.0.2
+github "texturegroup/texture" == 2.6
