@@ -40,21 +40,27 @@ extension ObservableType {
 
                     binding(proxy, event)
 
-                    switch event {
-                    case .error(let error):
-                        bindingErrorToInterface(error)
-                        unregisterDelegate.dispose()
-                    case .completed:
-                        unregisterDelegate.dispose()
-                    default:
-                        break
+                    // ensure running unregisterDelegate.dispose() on main thread
+                    DispatchQueue.main.async {
+                        switch event {
+                        case .error(let error):
+                            bindingErrorToInterface(error)
+                            unregisterDelegate.dispose()
+                        case .completed:
+                            unregisterDelegate.dispose()
+                        default:
+                            break
+                        }
                     }
-            }
+                }
 
             return Disposables.create { [weak object] in
-                subscription.dispose()
-                object?.layoutIfNeeded()
-                unregisterDelegate.dispose()
+                // ensure running unregisterDelegate.dispose() on main thread
+                DispatchQueue.main.async {
+                    subscription.dispose()
+                    object?.layoutIfNeeded()
+                    unregisterDelegate.dispose()
+                }
             }
     }
 }
