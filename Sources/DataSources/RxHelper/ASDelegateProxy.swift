@@ -17,7 +17,13 @@ extension ObservableType {
         where DelegateProxy.ParentObject: ASDisplayNode {
 
             let proxy = DelegateProxy.proxy(for: object)
-            let unregisterDelegate = DelegateProxy.installForwardDelegate(dataSource, retainDelegate: retainDataSource, onProxyForObject: object)
+            
+            // ensure dispose unregisterDelegate on main thread
+            let unregisterDelegate = ScheduledDisposable(
+                scheduler: MainScheduler.instance,
+                disposable: DelegateProxy.installForwardDelegate(dataSource, retainDelegate: retainDataSource, onProxyForObject: object)
+            )
+            
             // this is needed to flush any delayed old state (https://github.com/RxSwiftCommunity/RxDataSources/pull/75)
             object.layoutIfNeeded()
 
@@ -40,27 +46,21 @@ extension ObservableType {
 
                     binding(proxy, event)
 
-                    // ensure running unregisterDelegate.dispose() on main thread
-                    DispatchQueue.main.async {
-                        switch event {
-                        case .error(let error):
-                            bindingErrorToInterface(error)
-                            unregisterDelegate.dispose()
-                        case .completed:
-                            unregisterDelegate.dispose()
-                        default:
-                            break
-                        }
+                    switch event {
+                    case .error(let error):
+                        bindingErrorToInterface(error)
+                        unregisterDelegate.dispose()
+                    case .completed:
+                        unregisterDelegate.dispose()
+                    default:
+                        break
                     }
                 }
 
             return Disposables.create { [weak object] in
-                // ensure running unregisterDelegate.dispose() on main thread
-                DispatchQueue.main.async {
-                    subscription.dispose()
-                    object?.layoutIfNeeded()
-                    unregisterDelegate.dispose()
-                }
+                subscription.dispose()
+                object?.layoutIfNeeded()
+                unregisterDelegate.dispose()
             }
     }
 }
