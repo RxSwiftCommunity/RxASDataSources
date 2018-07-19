@@ -18,9 +18,23 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
     public typealias Section = S
     
     public typealias ConfigureCell = (ASCollectionSectionedDataSource<S>, ASCollectionNode, IndexPath, I) -> ASCellNode
+    public typealias ConfigureCellBlock = (ASCollectionSectionedDataSource<S>, ASCollectionNode, IndexPath, I) -> ASCellNodeBlock
     public typealias ConfigureSupplementaryView = (ASCollectionSectionedDataSource<S>, ASCollectionNode, String, IndexPath) -> ASCellNode
+    public typealias ConfigureSupplementaryViewBlock = (ASCollectionSectionedDataSource<S>, ASCollectionNode, String, IndexPath) -> ASCellNodeBlock
     public typealias MoveItem = (ASCollectionSectionedDataSource<S>, _ sourceIndexPath: IndexPath, _ destinationIndexPath:IndexPath) -> Void
     public typealias CanMoveItemAtIndexPath = (ASCollectionSectionedDataSource<S>, IndexPath) -> Bool
+
+    fileprivate static func configureCellNotSet(dataSource: ASCollectionSectionedDataSource<S>, node: ASCollectionNode, indexPath: IndexPath, model: I) -> ASCellNode {
+        return ASCollectionDataSourceNotSet().collectionNode(node, nodeForItemAt: indexPath)
+    }
+
+    fileprivate static func configureCellBlockNotSet(dataSource: ASCollectionSectionedDataSource<S>, node: ASCollectionNode, indexPath: IndexPath, model: I) -> ASCellNodeBlock {
+        return { dataSource.collectionNode(node, nodeForItemAt: indexPath) }
+    }
+
+    fileprivate static func configureSupplementaryViewBlockNotSet(dataSource: ASCollectionSectionedDataSource<S>, node: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, indexPath: IndexPath) -> ASCellNodeBlock {
+        return { dataSource.collectionNode(node, nodeForSupplementaryElementOfKind: kind, at: indexPath) }
+    }
 
     public init(
         configureCell: @escaping ConfigureCell,
@@ -29,7 +43,51 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
         canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
         ) {
         self.configureCell = configureCell
+        self.configureCellBlock = ASCollectionSectionedDataSource.configureCellBlockNotSet
         self.configureSupplementaryView = configureSupplementaryView
+        self.configureSupplementaryViewBlock = ASCollectionSectionedDataSource.configureSupplementaryViewBlockNotSet
+        self.moveItem = moveItem
+        self.canMoveItemAtIndexPath = canMoveItemAtIndexPath
+    }
+
+    public init(
+        configureCellBlock: @escaping ConfigureCellBlock,
+        configureSupplementaryView: ConfigureSupplementaryView? = nil,
+        moveItem: @escaping MoveItem = { _, _, _ in () },
+        canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
+        ) {
+        self.configureCell = ASCollectionSectionedDataSource.configureCellNotSet
+        self.configureCellBlock = configureCellBlock
+        self.configureSupplementaryView = configureSupplementaryView
+        self.configureSupplementaryViewBlock = ASCollectionSectionedDataSource.configureSupplementaryViewBlockNotSet
+        self.moveItem = moveItem
+        self.canMoveItemAtIndexPath = canMoveItemAtIndexPath
+    }
+
+    public init(
+        configureCell: @escaping ConfigureCell,
+        configureSupplementaryViewBlock: ConfigureSupplementaryViewBlock? = nil,
+        moveItem: @escaping MoveItem = { _, _, _ in () },
+        canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
+        ) {
+        self.configureCell = configureCell
+        self.configureCellBlock = ASCollectionSectionedDataSource.configureCellBlockNotSet
+        self.configureSupplementaryView = nil
+        self.configureSupplementaryViewBlock = configureSupplementaryViewBlock
+        self.moveItem = moveItem
+        self.canMoveItemAtIndexPath = canMoveItemAtIndexPath
+    }
+
+    public init(
+        configureCellBlock: @escaping ConfigureCellBlock,
+        configureSupplementaryViewBlock: ConfigureSupplementaryViewBlock? = nil,
+        moveItem: @escaping MoveItem = { _, _, _ in () },
+        canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
+        ) {
+        self.configureCell = ASCollectionSectionedDataSource.configureCellNotSet
+        self.configureCellBlock = configureCellBlock
+        self.configureSupplementaryView = nil
+        self.configureSupplementaryViewBlock = configureSupplementaryViewBlock
         self.moveItem = moveItem
         self.canMoveItemAtIndexPath = canMoveItemAtIndexPath
     }
@@ -92,7 +150,23 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
         }
     }
 
+    open var configureCellBlock: ConfigureCellBlock {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+
     open var configureSupplementaryView: ConfigureSupplementaryView? {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+
+    open var configureSupplementaryViewBlock: ConfigureSupplementaryViewBlock? {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -107,6 +181,7 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
             #endif
         }
     }
+
     open var canMoveItemAtIndexPath: CanMoveItemAtIndexPath {
         didSet {
             #if DEBUG
@@ -131,10 +206,24 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
         return configureCell(self, collectionNode, indexPath, self[indexPath])
     }
 
+    open func collectionNode(_ collectionNode: ASCollectionNode, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
+        precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
+
+        return configureCellBlock(self, collectionNode, indexPath, self[indexPath])
+    }
+
     open func collectionNode(_ collectionNode: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> ASCellNode {
         guard let cell = configureSupplementaryView?(self, collectionNode, kind, indexPath) else {
             fatalError("configureSupplementaryView was not set")
         }
+        return cell
+    }
+
+    open func collectionNode(_ collectionNode: ASCollectionNode, nodeBlockForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> ASCellNodeBlock {
+        guard let cell = configureSupplementaryViewBlock?(self, collectionNode, kind, indexPath) else {
+            fatalError("configureSUpplementaryViewBlock was not set")
+        }
+
         return cell
     }
 
