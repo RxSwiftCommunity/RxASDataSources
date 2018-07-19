@@ -162,6 +162,10 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
+
+                if self.configureSupplementaryViewBlock != nil {
+                    print("[WARNING][RxASDataSources] `configureSupplementaryView` is always over written by `configureSupplementaryViewBlock`.")
+                }
             #endif
         }
     }
@@ -170,6 +174,10 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
+
+                if self.configureSupplementaryView != nil {
+                    print("[WARNING][RxASDataSources] `configureSupplementaryViewBlock` always over write `configureSupplementaryView`.")
+                }
             #endif
         }
     }
