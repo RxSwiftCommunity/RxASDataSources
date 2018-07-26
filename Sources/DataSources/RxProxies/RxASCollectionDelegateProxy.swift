@@ -121,6 +121,16 @@ public extension Reactive where Base: ASCollectionNode {
         
         return ControlEvent(events: source)
     }
+
+    /// Reactive wrapper for `delegate` message `collectionNode(_:willBeginBatchFetchWith:)`
+    var willBeginBatchFetch: ControlEvent<ASBatchContext> {
+        let source: Observable<ASBatchContext> = self.delegate.methodInvoked(#selector(ASCollectionDelegate.collectionNode(_:willBeginBatchFetchWith:)))
+            .map { a in
+                return try castOrThrow(ASBatchContext.self, a[1])
+        }
+
+        return ControlEvent(events: source)
+    }
     
     /// Reactive wrapper for `delegate` message `collectionNode(_:didSelectItemAtIndexPath:)`.
     ///
