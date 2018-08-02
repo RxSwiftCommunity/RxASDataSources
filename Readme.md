@@ -8,9 +8,12 @@
 
 [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) for [AsyncDisplayKit/Texture](http://texturegroup.org/docs/getting-started.html): ASTableNode & ASCollectionNode.
 
+- [RxASDataSources](#rxasdatasources)
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
+    - [CocoaPods](#cocoapods)
+    - [Carthage](#carthage)
 - [Usage](#usage)
 - [License](#license)
 
@@ -18,7 +21,7 @@
 - [x] **O(N)** Diff algorithm from [RxDataSources/Differentiator](https://github.com/RxSwiftCommunity/RxDataSources/tree/master/Sources/Differentiator)
 - [x] Shared RxDataSources's APIs so you must learn only once.
 - [x] Supports `ASTableNode` and `ASCollectionNode`
-- [ ] Support `nodeBlockForRowAtIndexPath`
+- [x] Support `nodeBlock`
 - [ ] More complex Example app
 
 
