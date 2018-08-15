@@ -17,7 +17,7 @@ import AsyncDisplayKit
     import Differentiator
 #endif
 
-final class RxASTableReloadDataSource<S: SectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
+open class RxASTableReloadDataSource<S: SectionModelType>: ASTableSectionedDataSource<S>, RxASTableDataSourceType {
     public typealias Element = [S]
 
     open func tableNode(_ tableNode: ASTableNode, observedEvent: RxSwift.Event<Element>) -> Void {
