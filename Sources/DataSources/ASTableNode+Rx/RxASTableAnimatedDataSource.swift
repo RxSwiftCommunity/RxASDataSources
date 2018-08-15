@@ -150,6 +150,6 @@ open class RxASTableAnimatedDataSource<S: AnimatableSectionModelType>: ASTableSe
                     tableNode.reloadData()
                 }
             }
-            }.on(observedEvent)
+        }.on(observedEvent)
     }
 }
