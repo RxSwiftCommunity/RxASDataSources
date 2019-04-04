@@ -19,13 +19,13 @@ func indexSet(_ values: [Int]) -> IndexSet {
 }
 
 public struct RowAnimation {
-    public let insertAnimation: UITableViewRowAnimation
-    public let reloadAnimation: UITableViewRowAnimation
-    public let deleteAnimation: UITableViewRowAnimation
+    public let insertAnimation: UITableView.RowAnimation
+    public let reloadAnimation: UITableView.RowAnimation
+    public let deleteAnimation: UITableView.RowAnimation
 
-    public init(insertAnimation: UITableViewRowAnimation = .automatic,
-                reloadAnimation: UITableViewRowAnimation = .automatic,
-                deleteAnimation: UITableViewRowAnimation = .automatic) {
+    public init(insertAnimation: UITableView.RowAnimation = .automatic,
+                reloadAnimation: UITableView.RowAnimation = .automatic,
+                deleteAnimation: UITableView.RowAnimation = .automatic) {
         self.insertAnimation = insertAnimation
         self.reloadAnimation = reloadAnimation
         self.deleteAnimation = deleteAnimation
@@ -33,15 +33,15 @@ public struct RowAnimation {
 }
 
 public protocol SectionedNodeType {
-    func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation)
-    func deleteItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation)
+    func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableView.RowAnimation)
+    func deleteItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableView.RowAnimation)
     func moveItemAtIndexPath(_ from: IndexPath, to: IndexPath)
-    func reloadItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation)
+    func reloadItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableView.RowAnimation)
 
-    func insertSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
-    func deleteSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
+    func insertSections(_ sections: [Int], animationStyle: UITableView.RowAnimation)
+    func deleteSections(_ sections: [Int], animationStyle: UITableView.RowAnimation)
     func moveSection(_ from: Int, to: Int)
-    func reloadSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
+    func reloadSections(_ sections: [Int], animationStyle: UITableView.RowAnimation)
 
     func performBatchUpdates<S>(_ changes: Changeset<S>, animated: Bool, animationConfiguration: RowAnimation)
 }

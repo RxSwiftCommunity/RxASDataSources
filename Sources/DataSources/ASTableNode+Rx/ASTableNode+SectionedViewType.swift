@@ -12,11 +12,11 @@ import Differentiator
 
 extension ASTableNode: SectionedNodeType {
 
-    public func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation) {
+    public func insertItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableView.RowAnimation) {
         self.insertRows(at: paths, with: animationStyle)
     }
 
-    public func deleteItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation) {
+    public func deleteItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableView.RowAnimation) {
         self.deleteRows(at: paths, with: animationStyle)
     }
 
@@ -24,15 +24,15 @@ extension ASTableNode: SectionedNodeType {
         self.moveRow(at: from, to: to)
     }
 
-    public func reloadItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableViewRowAnimation) {
+    public func reloadItemsAtIndexPaths(_ paths: [IndexPath], animationStyle: UITableView.RowAnimation) {
         self.reloadRows(at: paths, with: animationStyle)
     }
 
-    public func insertSections(_ sections: [Int], animationStyle: UITableViewRowAnimation) {
+    public func insertSections(_ sections: [Int], animationStyle: UITableView.RowAnimation) {
         self.insertSections(indexSet(sections), with: animationStyle)
     }
 
-    public func deleteSections(_ sections: [Int], animationStyle: UITableViewRowAnimation) {
+    public func deleteSections(_ sections: [Int], animationStyle: UITableView.RowAnimation) {
         self.deleteSections(indexSet(sections), with: animationStyle)
     }
 
@@ -40,7 +40,7 @@ extension ASTableNode: SectionedNodeType {
         self.moveSection(from, toSection: to)
     }
 
-    public func reloadSections(_ sections: [Int], animationStyle: UITableViewRowAnimation) {
+    public func reloadSections(_ sections: [Int], animationStyle: UITableView.RowAnimation) {
         self.reloadSections(indexSet(sections), with: animationStyle)
     }
 
