@@ -30,7 +30,7 @@ public extension Reactive where Base: ASTableNode {
     }
 }
 
-public extension Reactive where Base: ASTableNode {
+extension Reactive where Base: ASTableNode {
     /**
      Reactive wrapper for `dataSource`.
 
