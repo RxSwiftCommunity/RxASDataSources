@@ -35,7 +35,7 @@ public extension Reactive where Base: ASCollectionNode {
 
      For more information take a look at `DelegateProxyType` protocol documentation.
      */
-    public var dataSource: DelegateProxy<ASCollectionNode, ASCollectionDataSource> {
+    var dataSource: DelegateProxy<ASCollectionNode, ASCollectionDataSource> {
         return RxASCollectionDataSourceProxy.proxy(for: base)
     }
 
@@ -48,7 +48,7 @@ public extension Reactive where Base: ASCollectionNode {
      - parameter dataSource: Data source object.
      - returns: Disposable object that can be used to unbind the data source.
      */
-    public func setDataSource(_ dataSource: ASCollectionDataSource)
+    func setDataSource(_ dataSource: ASCollectionDataSource)
         -> Disposable {
             return RxASCollectionDataSourceProxy.installForwardDelegate(dataSource, retainDelegate: false, onProxyForObject: self.base)
     }
