@@ -29,8 +29,9 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
     }
 
     fileprivate static func configureCellBlockNotSet(dataSource: ASCollectionSectionedDataSource<S>, node: ASCollectionNode, indexPath: IndexPath, model: I) -> ASCellNodeBlock {
-        // Users expect collectionNode(_:nodeForItemAt:) will be executed in main thread according to api doc (http://texturegroup.org/appledoc/Protocols/ASCollectionDataSource.html#//api/name/collectionView:nodeForItemAtIndexPath:).
-        return { DispatchQueue.main.sync(execute: { dataSource.collectionNode(node, nodeForItemAt: indexPath) }) }
+        // Users expect collectionNode(_:nodeForItemAt:) will be executed in main thread
+        let cellNode = dataSource.collectionNode(node, nodeForItemAt: indexPath)
+        return { cellNode }
     }
 
     fileprivate static func configureSupplementaryViewBlockNotSet(dataSource: ASCollectionSectionedDataSource<S>, node: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, indexPath: IndexPath) -> ASCellNodeBlock {
