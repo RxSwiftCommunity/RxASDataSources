@@ -29,6 +29,6 @@ open class RxASTableReloadDataSource<S: SectionModelType>: ASTableSectionedDataS
                 dataSource.setSections(element)
                 tableNode.reloadData()
             }
-            }.on(observedEvent)
+        }.on(observedEvent)
     }
 }

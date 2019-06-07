@@ -29,11 +29,14 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
     }
 
     fileprivate static func configureCellBlockNotSet(dataSource: ASCollectionSectionedDataSource<S>, node: ASCollectionNode, indexPath: IndexPath, model: I) -> ASCellNodeBlock {
-        return { dataSource.collectionNode(node, nodeForItemAt: indexPath) }
+        // Users expect collectionNode(_:nodeForItemAt:) will be executed in main thread
+        let cellNode = dataSource.collectionNode(node, nodeForItemAt: indexPath)
+        return { cellNode }
     }
 
     fileprivate static func configureSupplementaryViewBlockNotSet(dataSource: ASCollectionSectionedDataSource<S>, node: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, indexPath: IndexPath) -> ASCellNodeBlock {
-        return { dataSource.collectionNode(node, nodeForSupplementaryElementOfKind: kind, at: indexPath) }
+        // Users expect collectionNode(_nodeForSupplementaryElementOfKind:at:) will be executed in main thread according to api doc.
+        return { DispatchQueue.main.sync(execute: { dataSource.collectionNode(node, nodeForSupplementaryElementOfKind: kind, at: indexPath) }) }
     }
 
     public init(
