@@ -69,7 +69,7 @@ public extension Reactive where Base: ASTableNode {
     var itemInserted: ControlEvent<IndexPath> {
         let source = self.dataSource.methodInvoked(#selector(ASTableDataSource.tableView(_:commit:forRowAt:)))
             .filter { a in
-                return UITableViewCellEditingStyle(rawValue: (try castOrThrow(NSNumber.self, a[1])).intValue) == .insert
+                return UITableViewCell.EditingStyle(rawValue: (try castOrThrow(NSNumber.self, a[1])).intValue) == .insert
             }
             .map { a in
                 return (try castOrThrow(IndexPath.self, a[2]))
@@ -84,7 +84,7 @@ public extension Reactive where Base: ASTableNode {
     var itemDeleted: ControlEvent<IndexPath> {
         let source = self.dataSource.methodInvoked(#selector(ASTableDataSource.tableView(_:commit:forRowAt:)))
             .filter { a in
-                return UITableViewCellEditingStyle(rawValue: (try castOrThrow(NSNumber.self, a[1])).intValue) == .delete
+                return UITableViewCell.EditingStyle(rawValue: (try castOrThrow(NSNumber.self, a[1])).intValue) == .delete
             }
             .map { a in
                 return try castOrThrow(IndexPath.self, a[2])
