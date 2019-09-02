@@ -1,3 +1,4 @@
+
 ## RxASDataSources
 
 [![Platforms](https://img.shields.io/cocoapods/p/RxASDataSources.svg)](https://cocoapods.org/pods/RxASDataSources)
@@ -12,8 +13,8 @@
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
-    - [CocoaPods](#cocoapods)
-    - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
+  - [Carthage](#carthage)
 - [Usage](#usage)
 - [License](#license)
 
@@ -27,9 +28,9 @@
 
 ## Requirements
 
-- iOS 8.0+
-- Xcode 9.0+
-- RxSwift 4.0 & Texture 2.5
+- iOS 9.0+
+- Xcode 10.1+
+- RxSwift 5.0 & Texture 2.8
 
 ## Installation
 
