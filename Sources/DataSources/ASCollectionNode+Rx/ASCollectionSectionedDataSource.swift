@@ -36,7 +36,8 @@ open class ASCollectionSectionedDataSource<S: SectionModelType>: NSObject, ASCol
 
     fileprivate static func configureSupplementaryViewBlockNotSet(dataSource: ASCollectionSectionedDataSource<S>, node: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, indexPath: IndexPath) -> ASCellNodeBlock {
         // Users expect collectionNode(_nodeForSupplementaryElementOfKind:at:) will be executed in main thread according to api doc.
-        return { DispatchQueue.main.sync(execute: { dataSource.collectionNode(node, nodeForSupplementaryElementOfKind: kind, at: indexPath) }) }
+        let cellNode = dataSource.collectionNode(node, nodeForSupplementaryElementOfKind: kind, at: indexPath)
+        return { cellNode }
     }
 
     public init(
