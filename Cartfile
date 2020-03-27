@@ -1,4 +1,4 @@
 github "RxSwiftCommunity/RxDataSources"
 github "texturegroup/texture"
-github "pinterest/PINCache" ~>  3.0.1-beta.7
-github "ReactiveX/RxSwift" ~> 5.0.0
+github "pinterest/PINCache" ~>  3.0.1-beta.8
+github "ReactiveX/RxSwift" ~> 5.1.1
