@@ -13,7 +13,7 @@ import RxCocoa
 public extension Reactive where Base: ASCollectionNode {
     func items<DataSource: RxASCollectionDataSourceType & ASCollectionDataSource, O: ObservableType>(dataSource: DataSource)
         -> (_ source: O)
-        -> Disposable where DataSource.Element == O.E {
+        -> Disposable where DataSource.Element == O.Element {
 
             return { source in
 
